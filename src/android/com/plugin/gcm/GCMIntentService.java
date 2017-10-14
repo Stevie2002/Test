@@ -147,20 +147,20 @@ public class GCMIntentService extends IntentService {
 
     // LARGE ICON
     // TODO: http://stackoverflow.com/questions/24840282/load-image-from-url-in-notification-android
-    //    String image = extras.getString("image");
-    //    Bitmap largeIcon;
-    //    if (image != null) {
-    //      if (image.startsWith("http")) {
-    //        largeIcon = getBitmapFromURL(image);
-    //      } else {
-    //        //will play /platform/android/res/raw/image
-    //        largeIcon = BitmapFactory.decodeResource(getResources(), this.getResources().getIdentifier(image, null, null));
-    //      }
-    //
-    //      if (largeIcon != null) {
-    //        mBuilder.setLargeIcon(largeIcon);
-    //      }
-    //    }
+	String image = extras.getString("image");
+	Bitmap largeIcon;
+	if (image != null) {
+	 if (image.startsWith("http")) {
+	   largeIcon = getBitmapFromURL(image);
+	 } else {
+	   //will play /platform/android/res/raw/image
+	   largeIcon = BitmapFactory.decodeResource(getResources(), this.getResources().getIdentifier(image, null, null));
+	 }
+
+	 if (largeIcon != null) {
+	   mBuilder.setLargeIcon(largeIcon);
+	 }
+	}
 
     // DEFAULTS (LIGHT, SOUND, VIBRATE)
     int defaults = Notification.DEFAULT_ALL;
@@ -224,30 +224,20 @@ public class GCMIntentService extends IntentService {
       NOTIFICATION_ID += 1;
     }
 	
-	 NotificationCompat.Builder nBuilder = new Notification.Builder()
-		 .setContentTitle("5 New mails from E-Mail")
-		 .setContentText("Test line")
-		 .setStyle(new Notification.InboxStyle()
-			 .addLine("Line 1")
-			 .addLine("Line 2")
-			 .setContentTitle("Neuer Titel")
-			 .setSummaryText("+3 more"));
-
-    mNotificationManager.notify(appName, NOTIFICATION_ID, nBuilder.build());
-    // mNotificationManager.notify(appName, NOTIFICATION_ID, mBuilder.build());
+    mNotificationManager.notify(appName, NOTIFICATION_ID, mBuilder.build());
 	
   }
 
-  //  private Bitmap getBitmapFromURL(String src) {
-  //    Bitmap image = null;
-  //    try {
-  //      URL url = new URL(src);
-  //      image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-  //    } catch(IOException e) {
-  //      System.out.println(e);
-  //    }
-  //    return image;
-  //  }
+   private Bitmap getBitmapFromURL(String src) {
+     Bitmap image = null;
+     try {
+       URL url = new URL(src);
+       image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+     } catch(IOException e) {
+       System.out.println(e);
+     }
+     return image;
+   }
 
   private static String getAppName(Context context) {
     CharSequence appName = context.getPackageManager().getApplicationLabel(context.getApplicationInfo());
