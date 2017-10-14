@@ -94,7 +94,14 @@ public class GCMIntentService extends IntentService {
     notificationIntent.putExtra("pushBundle", extras);
 
     PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+	
+	Notification noti = new Notification.Builder(mContext)
+         .setContentTitle("New mail from " + sender.toString())
+         .setContentText(subject)
+         .setSmallIcon(R.drawable.new_mail)
+         .setLargeIcon(aBitmap)
+         .build();
+	
     NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
     mBuilder.setWhen(System.currentTimeMillis());
     mBuilder.setContentIntent(contentIntent);
@@ -147,20 +154,20 @@ public class GCMIntentService extends IntentService {
 
     // LARGE ICON
     // TODO: http://stackoverflow.com/questions/24840282/load-image-from-url-in-notification-android
-	String image = extras.getString("image");
-	Bitmap largeIcon;
-	if (image != null) {
-	 if (image.startsWith("http")) {
-	   largeIcon = getBitmapFromURL(image);
-	 } else {
-	   //will play /platform/android/res/raw/image
-	   largeIcon = BitmapFactory.decodeResource(getResources(), this.getResources().getIdentifier(image, null, null));
-	 }
+	// String image = extras.getString("image");
+	// Bitmap largeIcon;
+	// if (image != null) {
+	 // if (image.startsWith("http")) {
+	   // largeIcon = getBitmapFromURL(image);
+	 // } else {
+	   // // will play /platform/android/res/raw/image
+	   // largeIcon = BitmapFactory.decodeResource(getResources(), this.getResources().getIdentifier(image, null, null));
+	 // }
 
-	 if (largeIcon != null) {
-	   mBuilder.setLargeIcon(largeIcon);
-	 }
-	}
+	 // if (largeIcon != null) {
+	   // mBuilder.setLargeIcon(largeIcon);
+	 // }
+	// }
 
     // DEFAULTS (LIGHT, SOUND, VIBRATE)
     int defaults = Notification.DEFAULT_ALL;
@@ -228,16 +235,16 @@ public class GCMIntentService extends IntentService {
 	
   }
 
-   private Bitmap getBitmapFromURL(String src) {
-     Bitmap image = null;
-     try {
-       URL url = new URL(src);
-       image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-     } catch(IOException e) {
-       System.out.println(e);
-     }
-     return image;
-   }
+   // private Bitmap getBitmapFromURL(String src) {
+     // Bitmap image = null;
+     // try {
+       // URL url = new URL(src);
+       // image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+     // } catch(IOException e) {
+       // System.out.println(e);
+     // }
+     // return image;
+   // }
 
   private static String getAppName(Context context) {
     CharSequence appName = context.getPackageManager().getApplicationLabel(context.getApplicationInfo());
