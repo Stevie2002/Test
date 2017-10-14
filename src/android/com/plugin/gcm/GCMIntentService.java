@@ -121,6 +121,7 @@ public class GCMIntentService extends IntentService {
       boolean bigView = Boolean.parseBoolean(extras.getString("bigview"));
       if (bigView) {
         mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
+		mBuilder.setContentText("is BigView");
       }
     }
 
