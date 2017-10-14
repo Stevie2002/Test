@@ -230,7 +230,7 @@ public class GCMIntentService extends IntentService {
 		 .setStyle(new Notification.InboxStyle()
 			 .addLine("Line 1")
 			 .addLine("Line 2")
-			 .setContentTitle("")
+			 .setContentTitle("Neuer Titel")
 			 .setSummaryText("+3 more"));
 
     mNotificationManager.notify(appName, NOTIFICATION_ID, nBuilder.build());
