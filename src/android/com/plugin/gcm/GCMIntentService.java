@@ -225,13 +225,11 @@ public class GCMIntentService extends IntentService {
     }
 	
 	 NotificationCompat.Builder nBuilder = new Notification.Builder()
-		 .setContentTitle("5 New mails from " + sender.toString())
-		 .setContentText(subject)
-		 .setSmallIcon(R.drawable.new_mail)
-		 .setLargeIcon(aBitmap)
+		 .setContentTitle("5 New mails from E-Mail")
+		 .setContentText("Test line")
 		 .setStyle(new Notification.InboxStyle()
-			 .addLine(str1)
-			 .addLine(str2)
+			 .addLine("Line 1")
+			 .addLine("Line 2")
 			 .setContentTitle("")
 			 .setSummaryText("+3 more"));
 
