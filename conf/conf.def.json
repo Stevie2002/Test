@@ -1,0 +1,11 @@
+{
+    "appTitle": "App Framework",
+    "url": "https://app.house-of-slaves.de",
+    "urlCrossOrigin": "*",
+    "skipAjaxCheck": false,
+    "skipConnCheck" : false,
+    "customScript": "",
+    "loadType": "iframe",
+    "iframeTarget": "",
+    "evalPostMessage": true
+}

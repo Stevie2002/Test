@@ -1,0 +1,33 @@
+.modal-container { 
+    top: 0;
+    text-align: center;
+    position: fixed;
+    z-index: 999;
+    background: rgba(0,0,0,.8);
+    width: 100%;
+    height: 100%;
+}
+.modal-container .modal-message {
+    position: relative;
+    margin: 0 auto;
+    width: 90%;
+    top: 30%;
+    background: #fff;
+    padding: 20px 10px;
+    font-size: 1.2em;
+}
+.modal-container .icon {
+    display: block;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.button-exit {
+    color: #FFFFFF;
+    background-color: red;
+}
+
+#app-iframe {
+    width: 100%;
+    height: 100%;
+}
