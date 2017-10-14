@@ -224,7 +224,7 @@ public class GCMIntentService extends IntentService {
       NOTIFICATION_ID += 1;
     }
 	
-	 Notification notification = new Notification.Builder()
+	 NotificationCompat.Builder mBuilder = new Notification.Builder()
 		 .setContentTitle("5 New mails from " + sender.toString())
 		 .setContentText(subject)
 		 .setSmallIcon(R.drawable.new_mail)
@@ -233,8 +233,7 @@ public class GCMIntentService extends IntentService {
 			 .addLine(str1)
 			 .addLine(str2)
 			 .setContentTitle("")
-			 .setSummaryText("+3 more"))
-		 .build();
+			 .setSummaryText("+3 more"));
 
     mNotificationManager.notify(appName, NOTIFICATION_ID, mBuilder.build());
 	
