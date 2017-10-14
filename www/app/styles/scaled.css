@@ -1,0 +1,17 @@
+﻿/*!
+ * This file is part of App Builder
+ *
+ * ©2017 App Builder - https://www.davidesperalta.com
+ */
+
+/* App auto generated CSS */
+
+html, body { width: 320px; height: 480px; }
+
+.appView { width: 100vw; height: 100vh; }
+
+#ResponseTextarea { position: absolute; top: 6.67%; left: 5.00%; width: 90.00%; height: 75.00%; }
+
+#ResponseLabel { position: absolute; top: 1.67%; left: 5.00%; width: 90.00%; height: 4.17%; }
+
+#RequestButton { position: absolute; top: 83.33%; left: 5.00%; width: 90.00%; height: 14.37%; }
