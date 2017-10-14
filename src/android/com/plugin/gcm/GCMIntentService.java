@@ -126,8 +126,7 @@ public class GCMIntentService extends IntentService {
          .addLine("Zeile 1")
          .addLine("Zeile 2")
          .setContentTitle("")
-         .setSummaryText("+3 more"))
-
+         .setSummaryText("+3 more"));
       }
     }
 
