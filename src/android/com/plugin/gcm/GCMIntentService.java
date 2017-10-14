@@ -122,7 +122,7 @@ public class GCMIntentService extends IntentService {
       if (bigView) {
         // mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
 		// mBuilder.setContentText("is BigView");
-		mBuilder.setStyle(new Notification.InboxStyle().addLine("Zeile 1").addLine("Zeile 2").setContentTitle("Test").setSummaryText("+3 more"));
+		mBuilder.setStyle(new Notification.InboxStyle().addLine("Zeile 1").addLine("Zeile 2").setSummaryText("+3 more"));
       }
     }
 
