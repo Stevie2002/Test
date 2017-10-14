@@ -95,11 +95,10 @@ public class GCMIntentService extends IntentService {
 
     PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 	
-	Notification noti = new Notification.Builder(mContext)
-         .setContentTitle("New mail from " + sender.toString())
-         .setContentText(subject)
-         .setSmallIcon(R.drawable.new_mail)
-         .setLargeIcon(aBitmap)
+	Notification noti = new Notification.Builder(this)
+         .setContentTitle("New mail from ")
+         .setContentText("Test")
+         .setSmallIcon(this.getApplicationInfo().icon)
          .build();
 	
     NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
