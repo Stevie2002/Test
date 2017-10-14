@@ -120,9 +120,7 @@ public class GCMIntentService extends IntentService {
     if (extras.containsKey("bigview")) {
       boolean bigView = Boolean.parseBoolean(extras.getString("bigview"));
       if (bigView) {
-        // mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
-		// mBuilder.setContentText("is BigView");
-		mBuilder.setStyle(new Notification.InboxStyle().addLine("Zeile 1").addLine("Zeile 2").setSummaryText("+3 more"));
+        mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
       }
     }
 
@@ -225,8 +223,21 @@ public class GCMIntentService extends IntentService {
     } catch (Exception e) {
       NOTIFICATION_ID += 1;
     }
+	
+	 Notification notification = new Notification.Builder()
+		 .setContentTitle("5 New mails from " + sender.toString())
+		 .setContentText(subject)
+		 .setSmallIcon(R.drawable.new_mail)
+		 .setLargeIcon(aBitmap)
+		 .setStyle(new Notification.InboxStyle()
+			 .addLine(str1)
+			 .addLine(str2)
+			 .setContentTitle("")
+			 .setSummaryText("+3 more"))
+		 .build();
 
     mNotificationManager.notify(appName, NOTIFICATION_ID, mBuilder.build());
+	
   }
 
   //  private Bitmap getBitmapFromURL(String src) {
