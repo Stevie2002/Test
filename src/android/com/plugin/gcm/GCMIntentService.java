@@ -125,7 +125,7 @@ public class GCMIntentService extends IntentService {
 		mBuilder.setStyle(new Notification.InboxStyle()
          .addLine("Zeile 1")
          .addLine("Zeile 2")
-         .setContentTitle("")
+         .setContentTitle("Test")
          .setSummaryText("+3 more"));
       }
     }
