@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.apache.cordova.media;
+
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import com.plugin.badge.ShortcutBadger;
