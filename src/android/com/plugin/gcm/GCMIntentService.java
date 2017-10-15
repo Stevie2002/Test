@@ -18,6 +18,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
+
+import java.io.IOException;
 import java.net.URL;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -226,12 +228,12 @@ public class GCMIntentService extends IntentService {
 
 	private Bitmap getBitmapFromURL(String src) {
 		Bitmap image = null;
-		// try {
+		try {
 			URL url = new URL(src);
 			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-		// } catch(IOException e) {
+		} catch(IOException e) {
 			// System.out.println(e);
-		// }
+		}
 		return image;
 	}
 
