@@ -132,9 +132,11 @@ public class GCMIntentService extends IntentService {
 		
 		// GROUP
 		if (extras.containsKey("group")) {
-			mBuilder.setGroup(
-				extras.getString("group")
-			).setGroupSummary(true);
+			mBuilder
+				.setGroupSummary(true)
+				.setGroup(
+					extras.getString("group")
+				);
 		}
 		
 		// BIG VIEW
@@ -291,6 +293,14 @@ public class GCMIntentService extends IntentService {
 		ShortcutBadger.applyNotification(this, notification, msgCnt);
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
+		
+		
+		NotificationCompat.Builder builderThree = new Notification.Builder(this)
+			.setTicker("GROU TEST")
+			.setGroupSummary(true)
+			.setGroup("testgroup");
+		
+		mNotificationManager.notify(appName, NOTIFICATION_ID + 1, notification);
 	}
 
 	private Bitmap getBitmapFromURL(String src) {
