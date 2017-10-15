@@ -250,7 +250,15 @@ public class GCMIntentService extends IntentService {
 			int resourceId = r.getIdentifier(soundName, location, this.getPackageName());
 			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
 			mBuilder.setSound(soundUri);
+			
+			mNotificationManager.notify(appName, 2, new Notification.Builder(this)
+				.setTitle("SOUND")
+				.setContentText(soundName)
+				.setGroupSummary(true)
+				.setGroup("testgroup").build()
+			);
 		}
+		
 		
 		// LIGHTS
 		String ledColor = extras.getString("ledColor");
@@ -294,13 +302,24 @@ public class GCMIntentService extends IntentService {
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
-		
-		Notification.Builder builderThree = new Notification.Builder(this)
-			.setTicker("GROU TEST")
+		mNotificationManager.notify(appName, 10, new Notification.Builder(this)
+			.setTitle("GROUP TEST")
+			.setContentText("")
 			.setGroupSummary(true)
-			.setGroup("testgroup");
+			.setGroup("testgroup").build()
+		);
 		
-		mNotificationManager.notify(appName, NOTIFICATION_ID + 1, notification);
+		mNotificationManager.notify(appName, 11, new Notification.Builder(this)
+			.setTitle("ONLY TITLE")
+			.setGroupSummary(true)
+			.setGroup("testgroup").build()
+		);
+		
+		mNotificationManager.notify(appName, 12, new Notification.Builder(this)
+			.setContentText("ONLY MESSAGE")
+			.setGroupSummary(true)
+			.setGroup("testgroup").build()
+		);
 	}
 
 	private Bitmap getBitmapFromURL(String src) {
