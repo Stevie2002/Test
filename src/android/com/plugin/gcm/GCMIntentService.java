@@ -19,7 +19,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import me.leolin.shortcutbadger.ShortcutBadger;
+import com.plugin.badge.ShortcutBadger;
 
 public class GCMIntentService extends IntentService {
   public static int NOTIFICATION_ID = 1;
