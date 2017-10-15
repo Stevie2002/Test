@@ -133,7 +133,7 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("bigView.message")) {
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
 			
-			bigViewBuilder.setBigContentTitle(
+			bigViewBuilder.bigText(
 				extras.getString("bigView.message")
 			);
 			
