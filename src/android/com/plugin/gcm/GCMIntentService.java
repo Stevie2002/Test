@@ -139,6 +139,14 @@ public class GCMIntentService extends IntentService {
 			}
 		}
 		
+		mBuilder.setStyle(new Notification.InboxStyle()
+			.setBigContentTitle("Termine")
+			.addLine("Zeile 1")
+			.addLine("Zeile 2")
+			.addLine(events[i])
+			.setSummaryText("merh Termine")
+		);
+		
 		// SMALL ICON
 		String icon = extras.getString("icon");
 		if (icon == null) {
@@ -236,14 +244,17 @@ public class GCMIntentService extends IntentService {
 		try {
 			URL url = new URL(src);
 			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+			CharSequence text = "LargeIcon wurde geladen";
 		} catch(IOException e) {
 			// System.out.println(e);
-			Context context = getApplicationContext();
 			CharSequence text = "Fehler beim Laden des Icons";
-			int duration = Toast.LENGTH_SHORT;
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
 		}
+		
+		Context context = getApplicationContext();
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
+		
 		return image;
 	}
 
