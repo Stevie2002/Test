@@ -251,7 +251,8 @@ public class GCMIntentService extends IntentService {
 			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
 			mBuilder.setSound(soundUri);
 			
-			mNotificationManager.notify(appName, 2, new Notification.Builder(this)
+			Notification.Builder soundBuilder = new Notification.Builder(this);
+			mNotificationManager.notify(appName, 2, soundBuilder
 				.setTitle("SOUND")
 				.setContentText(soundName)
 				.setGroupSummary(true)
@@ -302,20 +303,23 @@ public class GCMIntentService extends IntentService {
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
-		mNotificationManager.notify(appName, 10, new Notification.Builder(this)
+		Notification.Builder testBuilder1 = new Notification.Builder(this);
+		mNotificationManager.notify(appName, 10, testBuilder1
 			.setTitle("GROUP TEST")
 			.setContentText("")
 			.setGroupSummary(true)
 			.setGroup("testgroup").build()
 		);
 		
-		mNotificationManager.notify(appName, 11, new Notification.Builder(this)
+		Notification.Builder testBuilder2 = new Notification.Builder(this);
+		mNotificationManager.notify(appName, 11, testBuilder2
 			.setTitle("ONLY TITLE")
 			.setGroupSummary(true)
 			.setGroup("testgroup").build()
 		);
 		
-		mNotificationManager.notify(appName, 12, new Notification.Builder(this)
+		Notification.Builder testBuilder3 = new Notification.Builder(this);
+		mNotificationManager.notify(appName, 12, testBuilder3
 			.setContentText("ONLY MESSAGE")
 			.setGroupSummary(true)
 			.setGroup("testgroup").build()
