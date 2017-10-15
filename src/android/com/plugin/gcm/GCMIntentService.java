@@ -19,6 +19,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
+import android.R.drawable;
 
 import java.io.IOException;
 import java.net.URL;
@@ -139,11 +140,17 @@ public class GCMIntentService extends IntentService {
 			}
 		}
 		
-		mBuilder.setStyle(new Notification.InboxStyle()
-			.addLine("Zeile 1")
-			.addLine("Zeile 2")
-			.setBigContentTitle("Termine")
-			.setSummaryText("merh Termine")
+		mBuilder.setStyle(
+			new Notification.InboxStyle()
+				.addLine("Zeile 1")
+				.addLine("Zeile 2")
+				.setBigContentTitle("Termine")
+				.setSummaryText("merh Termine")
+		);
+		
+		mBuilder.addAction(
+			new Notification.Action.Builder(R.drawable.ic_reply_icon,"test", replyPendingIntent)
+                .build()
 		);
 		
 		// SMALL ICON
