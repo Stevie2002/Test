@@ -248,8 +248,8 @@ public class GCMIntentService extends IntentService {
 			soundName = soundName.substring(0, soundName.lastIndexOf('.'));
 			Resources r = getResources();
 			int resourceId = r.getIdentifier(soundName, location, this.getPackageName());
-			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
-			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
+			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
+			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
 			mBuilder.setSound(soundUri);
 			
 			mBuilder.setContentText("android.resource://" + this.getPackageName() + "/" + soundName);
