@@ -264,7 +264,7 @@ public class GCMIntentService extends IntentService {
 				mediaPlayer.prepare(); // might take long! (for buffering, etc)
 				mediaPlayer.start();
 				*/
-				Uri myUri = soundName; // initialize Uri here
+				Uri myUri = soundUri; // initialize Uri here
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 				mediaPlayer.setDataSource(getApplicationContext(), myUri);
