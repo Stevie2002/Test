@@ -158,10 +158,8 @@ public class GCMIntentService extends IntentService {
 			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
 			if (rIcon > 0) {
 				mBuilder.setSmallIcon(rIcon);
-				mBuilder.setStyle(new Notification.BigPictureStyle().bigPicture(rIcon));
 			} else {
 				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
-				mBuilder.setStyle(new Notification.BigPictureStyle().bigPicture(this.getApplicationInfo().icon));
 			}
 		}
 		
