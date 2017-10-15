@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -74,15 +75,7 @@ public class GCMIntentService extends IntentService {
         // if we are in the foreground, just surface the payload, else post it to the statusbar
         if (PushPlugin.isInForeground()) {
           extras.putBoolean("foreground", true);
-          PushPlugin.sendExtras(extras);
-
-			Context context = getApplicationContext();
-			CharSequence text = "Hello toast!";
-			int duration = Toast.LENGTH_SHORT;
-
-			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
-		  
+          PushPlugin.sendExtras(extras);		  
         } else {
           extras.putBoolean("foreground", false);
           String title = extras.getString("title");
@@ -138,15 +131,14 @@ public class GCMIntentService extends IntentService {
 		
 		// BIG VIEW
 		if (extras.containsKey("bigView")) {
-			CharSequence[] bigView = extras.getCharSequenceArray("bigView");
+			ArrayList<String> bigView = extras.getStringArrayList("bigView");
 			
-			/*
 			mBuilder.setStyle(new Notification.BigTextStyle()
-				.setBigContentTitle("title")
-				.setSummaryText("summary")
-				.bigText(extras.getString("bigView.message"))
+				// .setBigContentTitle("title")
+				.setSummaryText(extras.getStringArrayList("bigView").getClass())
+				// .setSummaryText("summary")
+				// .bigText(extras.getString("bigView.message"))
 			);
-			*/
 		}
 		/*
 		if (extras.containsKey("bigview")) {
