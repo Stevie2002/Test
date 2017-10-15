@@ -130,29 +130,30 @@ public class GCMIntentService extends IntentService {
 		}
 		
 		// SMALL ICON
-		String icon = extras.getString("icon");
-		if (icon == null) {
+		String smallIcon = extras.getString("icon");
+		if (smallIcon == null) {
 			mBuilder.setSmallIcon(this.getApplicationInfo().icon);
 		} else {
 			String location = extras.getString("iconLocation");
 			location = location != null ? location : "drawable";
-			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
-			if (rIcon > 0) {
-				mBuilder.setSmallIcon(rIcon);
+			int rSmallIcon = this.getResources().getIdentifier(smallIcon.substring(0, smallIcon.lastIndexOf('.')), location, this.getPackageName());
+			if (rSmallIcon > 0) {
+				mBuilder.setSmallIcon(rSmallIcon);
 			} else {
 				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
 			}
 		}
+		
 		// SMALL LARGE ICON
-		String icon = extras.getString("icon");
-		if (icon == null) {
+		String largeIcon = extras.getString("icon");
+		if (largeIcon == null) {
 			mBuilder.setLargeIcon(this.getApplicationInfo().icon);
 		} else {
 			String location = extras.getString("iconLocation");
 			location = location != null ? location : "drawable";
-			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
-			if (rIcon > 0) {
-				mBuilder.setLargeIcon(rIcon);
+			int rLargeIcon = this.getResources().getIdentifier(largeIcon.substring(0, largeIcon.lastIndexOf('.')), location, this.getPackageName());
+			if (rLargeIcon > 0) {
+				mBuilder.setLargeIcon(rLargeIcon);
 			} else {
 				mBuilder.setLargeIcon(this.getApplicationInfo().icon);
 			}
