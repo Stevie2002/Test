@@ -133,9 +133,9 @@ public class GCMIntentService extends IntentService {
 			CharSequence[] bigView = extras.getCharSequenceArray("bigView");
 			
 			mBuilder.setStyle(new Notification.BigTextStyle()
-				.setBigContentTitle(bigView["title"])
-				.setSummaryText(bigView["summary"])
-				.bigText(bigView["message"])
+				.setBigContentTitle(bigView[0])
+				.setSummaryText(bigView[1])
+				.bigText(bigView[2])
 			);
 		}
 		/*
