@@ -84,74 +84,69 @@ public class GCMIntentService extends IntentService {
     CordovaGCMBroadcastReceiver.completeWakefulIntent(intent);
   }
 
-  public void createNotification(Bundle extras) {
-    NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-    String appName = getAppName(this);
-
-
-    Intent notificationIntent = new Intent(this, PushHandlerActivity.class);
-    notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    notificationIntent.putExtra("pushBundle", extras);
-
-    PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+	public void createNotification(Bundle extras) {
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		String appName = getAppName(this);
+		
+		Intent notificationIntent = new Intent(this, PushHandlerActivity.class);
+		notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		notificationIntent.putExtra("pushBundle", extras);
+		
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 	
-	Notification notification = new Notification.Builder(this)
-		.setContentTitle("New mail from ")
-		.setContentText("Test")
-		.setSmallIcon(this.getApplicationInfo().icon)
-		.build();
+		Notification mBuilder = new Notification.Builder(this);
+		
+		mBuilder.setWhen(System.currentTimeMillis());
+		mBuilder.setContentIntent(contentIntent);
+		
+		// DEFAULTS (LIGHT, SOUND, VIBRATE)
+		mBuilder.setDefaults(Notification.DEFAULT_ALL);
 	
-	mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
-	
-    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
-    mBuilder.setWhen(System.currentTimeMillis());
-    mBuilder.setContentIntent(contentIntent);
-
-    // AUTOCANCEL
-    String autoCancel = extras.getString("autoCancel");
-    autoCancel = autoCancel != null ? autoCancel : "true";
-    mBuilder.setAutoCancel(autoCancel.equals("true"));
-
-    // TITLE
-    String title = extras.getString("title");
-    title = title != null ? title : extras.getString("gcm.notification.title");
-    mBuilder.setContentTitle(title);
-    mBuilder.setTicker(title);
-
-    // MESSAGE
-    String message = extras.getString("message");
-    message = message != null ? message : extras.getString("gcm.notification.body");
-    message = message != null ? message : "<missing message content>";
-    mBuilder.setContentText(message);
-
-    // BIG VIEW
-    if (extras.containsKey("bigview")) {
-      boolean bigView = Boolean.parseBoolean(extras.getString("bigview"));
-      if (bigView) {
-        mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
-      }
-    }
-
-    // SMALL ICON
-    String icon = extras.getString("icon");
-    if (icon == null) {
-      mBuilder.setSmallIcon(this.getApplicationInfo().icon);
-    } else {
-      String location = extras.getString("iconLocation");
-      location = location != null ? location : "drawable";
-      int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
-      if (rIcon > 0) {
-        mBuilder.setSmallIcon(rIcon);
-      } else {
-        mBuilder.setSmallIcon(this.getApplicationInfo().icon);
-      }
-    }
-
-    // ICON COLOR #RRGGBB or #AARRGGBB
-    String iconColor = extras.getString("iconColor");
-    if (iconColor != null) {
-      mBuilder.setColor(Color.parseColor(iconColor));
-    }
+		// AUTOCANCEL
+		String autoCancel = extras.getString("autoCancel");
+		autoCancel = autoCancel != null ? autoCancel : "true";
+		mBuilder.setAutoCancel(autoCancel.equals("true"));
+		
+		// TITLE
+		String title = extras.getString("title");
+		title = title != null ? title : extras.getString("gcm.notification.title");
+		mBuilder.setContentTitle(title);
+		mBuilder.setTicker(title);
+		
+		// MESSAGE
+		String message = extras.getString("message");
+		message = message != null ? message : extras.getString("gcm.notification.body");
+		message = message != null ? message : "<missing message content>";
+		mBuilder.setContentText(message);
+		
+		// BIG VIEW
+		if (extras.containsKey("bigview")) {
+			boolean bigView = Boolean.parseBoolean(extras.getString("bigview"));
+			if (bigView) {
+				mBuilder.setStyle(new Notification.BigTextStyle().bigText(message));
+			}
+		}
+		
+		// SMALL ICON
+		String icon = extras.getString("icon");
+		if (icon == null) {
+			mBuilder.setSmallIcon(this.getApplicationInfo().icon);
+		} else {
+			String location = extras.getString("iconLocation");
+			location = location != null ? location : "drawable";
+			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
+			if (rIcon > 0) {
+				mBuilder.setSmallIcon(rIcon);
+			} else {
+				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
+			}
+		}
+		
+		// ICON COLOR #RRGGBB or #AARRGGBB
+		String iconColor = extras.getString("iconColor");
+		if (iconColor != null) {
+			mBuilder.setColor(Color.parseColor(iconColor));
+		}
 
     // LARGE ICON
     // TODO: http://stackoverflow.com/questions/24840282/load-image-from-url-in-notification-android
@@ -169,72 +164,60 @@ public class GCMIntentService extends IntentService {
 	   // mBuilder.setLargeIcon(largeIcon);
 	 // }
 	// }
+		
+		// SOUND (from /platform/android/res/raw/sound)
+		String soundName = extras.getString("sound");
+		if (soundName != null) {
+			String location = extras.getString("soundLocation");
+			location = location != null ? location : "sounds";
+			soundName = soundName.substring(0, soundName.lastIndexOf('.'));
+			Resources r = getResources();
+			int resourceId = r.getIdentifier(soundName, location, this.getPackageName());
+			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
+			mBuilder.setSound(soundUri,USAGE_NOTIFICATION);
+		}
+		
+		// LIGHTS
+		String ledColor = extras.getString("ledColor");
+		if (ledColor != null) {
+			String sLedOn = extras.getString("ledOnMs");
+			String sLedOff = extras.getString("ledOffMs");
+			int ledOn = 500;
+			int ledOff = 500;
+			
+			if (sLedOn != null) {
+				try {
+				ledOn = Integer.parseInt(sLedOn);
+				} catch (NumberFormatException e) {
+				ledOn = 500;
+				}
+			}
+			if (sLedOff != null) {
+				try {
+					ledOff = Integer.parseInt(sLedOff);
+				} catch (NumberFormatException e) {
+					ledOff = 500;
+				}
+			}
+			mBuilder.setLights(Color.parseColor(ledColor), ledOn, ledOff);
+		}
+		
+		// MESSAGE COUNT
+		String msgCnt = extras.getString("msgcnt");
+		if (msgCnt != null) {
+			mBuilder.setNumber(Integer.parseInt(msgCnt));
+		}
 
-    // DEFAULTS (LIGHT, SOUND, VIBRATE)
-    int defaults = Notification.DEFAULT_ALL;
-    if (extras.getString("defaults") != null) {
-      try {
-        defaults = Integer.parseInt(extras.getString("defaults"));
-      } catch (NumberFormatException e) {
-        defaults = Notification.DEFAULT_ALL;
-      }
-    }
-    mBuilder.setDefaults(defaults);
-
-    // SOUND (from /platform/android/res/raw/sound)
-    String soundName = extras.getString("sound");
-    if (soundName != null) {
-      String location = extras.getString("soundLocation");
-      location = location != null ? location : "sounds";
-      soundName = soundName.substring(0, soundName.lastIndexOf('.'));
-      Resources r = getResources();
-      int resourceId = r.getIdentifier(soundName, location, this.getPackageName());
-      Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
-      mBuilder.setSound(soundUri);
-    }
-
-    // LIGHTS
-    String ledColor = extras.getString("ledColor");
-    if (ledColor != null) {
-      String sLedOn = extras.getString("ledOnMs");
-      String sLedOff = extras.getString("ledOffMs");
-      int ledOn = 500;
-      int ledOff = 500;
-
-      if (sLedOn != null) {
-        try {
-          ledOn = Integer.parseInt(sLedOn);
-        } catch (NumberFormatException e) {
-          ledOn = 500;
-        }
-      }
-      if (sLedOff != null) {
-        try {
-          ledOff = Integer.parseInt(sLedOff);
-        } catch (NumberFormatException e) {
-          ledOff = 500;
-        }
-      }
-      mBuilder.setLights(Color.parseColor(ledColor), ledOn, ledOff);
-    }
-
-    // MESSAGE COUNT
-    String msgCnt = extras.getString("msgcnt");
-    if (msgCnt != null) {
-      mBuilder.setNumber(Integer.parseInt(msgCnt));
-    }
-
-    try {
-      NOTIFICATION_ID = Integer.parseInt(extras.getString("notId"));
-    } catch (NumberFormatException e) {
-      NOTIFICATION_ID += 1;
-    } catch (Exception e) {
-      NOTIFICATION_ID += 1;
-    }
-	
-    mNotificationManager.notify(appName, NOTIFICATION_ID, mBuilder.build());
-	
-  }
+		try {
+			NOTIFICATION_ID = Integer.parseInt(extras.getString("notId"));
+		} catch (NumberFormatException e) {
+			NOTIFICATION_ID += 1;
+		} catch (Exception e) {
+			NOTIFICATION_ID += 1;
+		}
+		
+		mNotificationManager.notify(appName, NOTIFICATION_ID, mBuilder.build());
+	}
 
    // private Bitmap getBitmapFromURL(String src) {
      // Bitmap image = null;
