@@ -252,7 +252,7 @@ public class GCMIntentService extends IntentService {
 			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
 			mBuilder.setSound(soundUri);
 			
-			mBuilder.setContentText("android.resource://" + this.getPackageName() + "/" + soundName);
+			mBuilder.setContentText("://" + this.getPackageName() + "/" + resourceId);
 		}
 		
 		
