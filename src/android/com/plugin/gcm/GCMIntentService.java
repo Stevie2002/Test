@@ -122,7 +122,7 @@ public class GCMIntentService extends IntentService {
 		title = title != null ? title : extras.getString("gcm.notification.title");
 		mBuilder.setContentTitle(title);
 		mBuilder.setTicker(title);
-		// mBuilder.setSubText("subtext");
+		mBuilder.setSubText("subtext");
 		
 		// MESSAGE
 		String message = extras.getString("message");
@@ -131,11 +131,11 @@ public class GCMIntentService extends IntentService {
 		mBuilder.setContentText(message);
 		
 		// GROUP
-		// if (extras.containsKey("group")) {
-			// mBuilder.setGroup(
-				// extras.getString("group")
-			// );
-		// }
+		if (extras.containsKey("group")) {
+			mBuilder.setGroup(
+				extras.getString("group")
+			).setGroupSummary(true);
+		}
 		
 		// BIG VIEW
 		if (extras.containsKey("bigView.message")) {
@@ -159,6 +159,12 @@ public class GCMIntentService extends IntentService {
 			
 			mBuilder.setStyle(bigViewBuilder);
 		}
+		
+		// PROGRESS
+		if (extras.containsKey("progress")) {
+			mBuilder.setProgress(100,25,false);
+		}
+
 		
 		// MESSAGES
 		/*
