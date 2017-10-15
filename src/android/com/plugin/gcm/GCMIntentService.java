@@ -19,7 +19,6 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
-import android.R.drawable;
 
 import java.io.IOException;
 import java.net.URL;
@@ -153,9 +152,6 @@ public class GCMIntentService extends IntentService {
 				.setSummaryText("merh Termine")
 		);
 		
-		mBuilder.addAction( new Notification.Action.Builder(R.drawable.icon, "Call", replyPendingIntent).build() );
-		mBuilder.addAction( new Notification.Action.Builder(R.drawable.ic_reply_icon, "Call", replyPendingIntent).build() );
-		
 		// SMALL ICON
 		String icon = extras.getString("icon");
 		if (icon == null) {
@@ -170,6 +166,9 @@ public class GCMIntentService extends IntentService {
 				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
 			}
 		}
+		
+		mBuilder.addAction( new Notification.Action.Builder(this.getApplicationInfo().icon, "Call", replyPendingIntent).build() );
+		mBuilder.addAction( new Notification.Action.Builder(this.getApplicationInfo().icon, "Call", replyPendingIntent).build() );
 		
 		// ICON COLOR #RRGGBB or #AARRGGBB
 		String iconColor = extras.getString("iconColor");
