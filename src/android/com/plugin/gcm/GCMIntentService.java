@@ -223,16 +223,16 @@ public class GCMIntentService extends IntentService {
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 	}
 
-   // private Bitmap getBitmapFromURL(String src) {
-     // Bitmap image = null;
-     // try {
-       // URL url = new URL(src);
-       // image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-     // } catch(IOException e) {
-       // System.out.println(e);
-     // }
-     // return image;
-   // }
+	private Bitmap getBitmapFromURL(String src) {
+		Bitmap image = null;
+		try {
+			URL url = new URL(src);
+			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+		} catch(IOException e) {
+			System.out.println(e);
+		}
+		return image;
+	}
 
   private static String getAppName(Context context) {
     CharSequence appName = context.getPackageManager().getApplicationLabel(context.getApplicationInfo());
