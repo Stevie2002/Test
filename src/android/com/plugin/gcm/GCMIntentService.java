@@ -78,6 +78,7 @@ public class GCMIntentService extends IntentService {
           PushPlugin.sendExtras(extras);		  
         } else {
           extras.putBoolean("foreground", false);
+		  PushPlugin.sendExtras(extras);		  
           String title = extras.getString("title");
           String message = extras.getString("message");
           title = title != null ? title : extras.getString("gcm.notification.title");
