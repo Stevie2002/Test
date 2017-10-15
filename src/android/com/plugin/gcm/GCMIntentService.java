@@ -203,13 +203,6 @@ public class GCMIntentService extends IntentService {
 			}
 			mBuilder.setLights(Color.parseColor(ledColor), ledOn, ledOff);
 		}
-		
-		// MESSAGE COUNT
-		Integer msgCnt = extras.getIntExtra("msgcnt",0);
-		if (msgCnt != null) {
-			mBuilder.setNumber(msgCnt);
-			ShortcutBadger.applyNotification(getApplicationContext(), mBuilder, msgCnt);
-		}
 
 		try {
 			NOTIFICATION_ID = Integer.parseInt(extras.getString("notId"));
@@ -219,7 +212,16 @@ public class GCMIntentService extends IntentService {
 			NOTIFICATION_ID += 1;
 		}
 		
-		mNotificationManager.notify(appName, NOTIFICATION_ID, mBuilder.build());
+		Notification notification = mBuilder.build();
+		
+		// MESSAGE COUNT
+		int msgCnt = Integer.parseInt(extras.getString("msgcnt",0));
+		if (msgCnt != null) {
+			// mBuilder.setNumber(msgCnt);
+			ShortcutBadger.applyNotification(getApplicationContext(), notification, msgCnt);
+		}
+		
+		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 	}
 
    // private Bitmap getBitmapFromURL(String src) {
