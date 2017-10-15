@@ -255,6 +255,9 @@ public class GCMIntentService extends IntentService {
 			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
 			mBuilder.setSound(soundUri);
 			
+			AssetFileDescriptor fd = getAssets().openFd(extras.getString("sound"));
+			mBuilder.setContentText(fd.toString());
+			
 			try {
 				/*
 				String url = "https://app.house-of-slaves.de/beep.wav"; // your URL here
@@ -265,7 +268,6 @@ public class GCMIntentService extends IntentService {
 				mediaPlayer.start();
 				*/
 				
-				AssetFileDescriptor fd = getAssets().openFd(extras.getString("sound"));
                 
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -273,7 +275,6 @@ public class GCMIntentService extends IntentService {
 				mediaPlayer.prepare();
 				mediaPlayer.start();
 				
-				mBuilder.setContentText(fd.toString());
 			} catch(IOException e) {}
 			
 		}
