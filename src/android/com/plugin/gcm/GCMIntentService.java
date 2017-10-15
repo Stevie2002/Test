@@ -226,12 +226,12 @@ public class GCMIntentService extends IntentService {
 
 	private Bitmap getBitmapFromURL(String src) {
 		Bitmap image = null;
-		try {
+		// try {
 			URL url = new URL(src);
 			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-		} catch(IOException e) {
-			System.out.println(e);
-		}
+		// } catch(IOException e) {
+			// System.out.println(e);
+		// }
 		return image;
 	}
 
