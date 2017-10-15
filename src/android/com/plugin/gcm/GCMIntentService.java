@@ -94,12 +94,10 @@ public class GCMIntentService extends IntentService {
 		
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 	
-		Notification mBuilder = new Notification.Builder(this)
-			.setWhen(System.currentTimeMillis())
-			.setContentIntent(contentIntent);
+		Notification.Builder mBuilder = new Notification.Builder(this);
 		
-		// mBuilder.setWhen(System.currentTimeMillis());
-		// mBuilder.setContentIntent(contentIntent);
+		mBuilder.setWhen(System.currentTimeMillis());
+		mBuilder.setContentIntent(contentIntent);
 		
 		// DEFAULTS (LIGHT, SOUND, VIBRATE)
 		mBuilder.setDefaults(Notification.DEFAULT_ALL);
