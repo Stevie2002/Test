@@ -140,7 +140,7 @@ public class GCMIntentService extends IntentService {
 		}
 		
 		mBuilder.setStyle(new Notification.InboxStyle()
-			.setBigContentTitle("Termine")
+			.setContentTitle("Termine")
 			.addLine("Zeile 1")
 			.addLine("Zeile 2")
 			.addLine(events[i])
