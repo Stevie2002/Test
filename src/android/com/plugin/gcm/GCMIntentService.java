@@ -122,6 +122,7 @@ public class GCMIntentService extends IntentService {
 		title = title != null ? title : extras.getString("gcm.notification.title");
 		mBuilder.setContentTitle(title);
 		mBuilder.setTicker(title);
+		mBuilder.setSubText("subtext");
 		
 		// MESSAGE
 		String message = extras.getString("message");
@@ -153,14 +154,16 @@ public class GCMIntentService extends IntentService {
 		}
 		
 		// MESSAGES
-			int timestamp = Integer.parseInt(extras.getString("timestamp"));
-			mBuilder.setStyle(new Notification.MessagingStyle("Me")
-				.setConversationTitle("Team lunch")
-				.addMessage("Hi", timestamp, null)
-				.addMessage("What's up?", timestamp, "Coworker")
-				.addMessage("Not much", timestamp, null)
-				.addMessage("How about lunch?", timestamp, "Coworker")
-			);
+		/*
+		int timestamp = Integer.parseInt(extras.getString("timestamp"));
+		mBuilder.setStyle(new Notification.MessagingStyle("Me")
+			.setConversationTitle("Team lunch")
+			.addMessage("Hi", timestamp, null)
+			.addMessage("What's up?", timestamp, "Coworker")
+			.addMessage("Not much", timestamp, null)
+			.addMessage("How about lunch?", timestamp, "Coworker")
+		);
+		*/
 			
 		/*
 		if (extras.containsKey("bigview")) {
