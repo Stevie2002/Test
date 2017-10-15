@@ -255,12 +255,14 @@ public class GCMIntentService extends IntentService {
 			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
 			mBuilder.setSound(soundUri);
 			
-			String url = "https://app.house-of-slaves.de/beep.wav"; // your URL here
-			MediaPlayer mediaPlayer = new MediaPlayer();
-			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mediaPlayer.setDataSource(url);
-			mediaPlayer.prepare(); // might take long! (for buffering, etc)
-			mediaPlayer.start();
+			try {
+				String url = "https://app.house-of-slaves.de/beep.wav"; // your URL here
+				MediaPlayer mediaPlayer = new MediaPlayer();
+				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+				mediaPlayer.setDataSource(url);
+				mediaPlayer.prepare(); // might take long! (for buffering, etc)
+				mediaPlayer.start();
+			} catch(IOException e) {}
 			
 			mBuilder.setContentText("://" + this.getPackageName() + "/" + resourceId);
 		}
