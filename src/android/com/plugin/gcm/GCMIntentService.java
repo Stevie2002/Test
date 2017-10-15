@@ -24,12 +24,6 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaArgs;
-import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.CordovaResourceApi;
-import org.apache.cordova.PluginResult; 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -271,7 +265,7 @@ public class GCMIntentService extends IntentService {
 				mediaPlayer.start();
 				*/
 				
-				android.content.res.AssetFileDescriptor fd = cordova.getActivity().getAssets().openFd(extras.getString("sound"));
+				AssetFileDescriptor fd = getAssets().openFd(extras.getString("sound"));
                 
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
