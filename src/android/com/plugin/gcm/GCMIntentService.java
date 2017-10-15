@@ -94,11 +94,6 @@ public class GCMIntentService extends IntentService {
   }
 
 	public void createNotification(Bundle extras) {
-		Context context = getApplicationContext();
-		int duration = Toast.LENGTH_SHORT;
-		Toast toast = Toast.makeText(context, "test Toast", duration);
-		toast.show();
-		
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		String appName = getAppName(this);
 		
@@ -163,8 +158,10 @@ public class GCMIntentService extends IntentService {
 			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
 			if (rIcon > 0) {
 				mBuilder.setSmallIcon(rIcon);
+				mBuilder.setStyle(new Notification.BigPictureStyle().bigPicture(rIcon));
 			} else {
 				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
+				mBuilder.setStyle(new Notification.BigPictureStyle().bigPicture(this.getApplicationInfo().icon));
 			}
 		}
 		
@@ -188,8 +185,10 @@ public class GCMIntentService extends IntentService {
 			}
 			if (largeIcon != null) {
 				mBuilder.setLargeIcon(largeIcon);
+				mBuilder.setStyle(new Notification.BigPictureStyle().bigPicture(largeIcon));
 			}
 		}
+		
 		
 		// SOUND (from /platform/android/res/raw/sound)
 		String soundName = extras.getString("sound");
@@ -248,20 +247,12 @@ public class GCMIntentService extends IntentService {
 
 	private Bitmap getBitmapFromURL(String src) {
 		Bitmap image = null;
-		CharSequence text = "LargeIcon wurde geladen";
 		try {
 			URL url = new URL(src);
 			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 		} catch(IOException e) {
 			// System.out.println(e);
-			text = "Fehler beim Laden des Icons";
 		}
-		
-		Context context = getApplicationContext();
-		int duration = Toast.LENGTH_SHORT;
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
-		
 		return image;
 	}
 
