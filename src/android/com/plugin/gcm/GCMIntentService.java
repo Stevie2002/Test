@@ -131,12 +131,11 @@ public class GCMIntentService extends IntentService {
 		// BIG VIEW
 		if (extras.containsKey("bigView")) {
 			CharSequence[] bigView = extras.getCharSequenceArray("bigView");
-			String message = extras.getString("bigView.message");
 			
 			mBuilder.setStyle(new Notification.BigTextStyle()
 				.setBigContentTitle("title")
 				.setSummaryText("summary")
-				.bigText(message)
+				.bigText(extras.getString("bigView.message"))
 			);
 		}
 		/*
