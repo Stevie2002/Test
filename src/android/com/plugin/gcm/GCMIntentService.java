@@ -94,6 +94,11 @@ public class GCMIntentService extends IntentService {
   }
 
 	public void createNotification(Bundle extras) {
+		Context context = getApplicationContext();
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, "test Toast", duration);
+		toast.show();
+		
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		String appName = getAppName(this);
 		
