@@ -304,12 +304,12 @@ public class GCMIntentService extends IntentService {
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
-		// mNotificationManager.notify(appName, 10, new Notification.Builder(this)
-			// .setContentTitle("GROUP TEST")
-			// .setContentText("Message ...")
-			// .setGroupSummary(true)
-			// .setGroup("testgroup").build()
-		// );
+		mNotificationManager.notify(appName, NOTIFICATION_ID += 1, new Notification.Builder(this)
+			.setContentTitle("GROUP TEST")
+			.setContentText("Message ...")
+			.setGroupSummary(true)
+			.setGroup("testgroup").build()
+		);
 		
 		// mNotificationManager.notify(appName, 11, new Notification.Builder(this)
 			// .setContentTitle("ONLY TITLE")
