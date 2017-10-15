@@ -130,16 +130,29 @@ public class GCMIntentService extends IntentService {
 		mBuilder.setContentText(message);
 		
 		// BIG VIEW
-		if (extras.containsKey("bigView")) {
-			ArrayList<String> bigView = extras.getStringArrayList("bigView");
+		if (extras.containsKey("bigView.message")) {
+			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
 			
-			mBuilder.setStyle(new Notification.BigTextStyle()
-				// .setBigContentTitle("title")
-				.setSummaryText(extras.getString("bigView").getClass().getName())
-				// .setSummaryText("summary")
-				// .bigText(extras.getString("bigView.message"))
+			bigViewBuilder..setBigContentTitle(
+				bigViewMessage = extras.getString("bigView.message");
 			);
+			
+			if (extras.containsKey("bigView.title")) {
+				bigViewBuilder.setBigContentTitle(
+					extras.getString("bigView.title")
+				);
+			}
+			
+			if (extras.containsKey("bigView.summary")) {
+				bigViewBuilder.setSummaryText(
+					bigViewSummary = extras.getString("bigView.summary");
+				);
+			}
+			
+			mBuilder.setStyle(bigViewBuilder);
 		}
+		
+			
 		/*
 		if (extras.containsKey("bigview")) {
 			boolean bigView = Boolean.parseBoolean(extras.getString("bigview"));
