@@ -78,8 +78,7 @@ public class GCMIntentService extends IntentService {
           PushPlugin.sendExtras(extras);		  
         } else {
           extras.putBoolean("foreground", false);
-		  PushPlugin.sendExtras(extras);
-          String title = extras.getString("title");
+		  String title = extras.getString("title");
           String message = extras.getString("message");
           title = title != null ? title : extras.getString("gcm.notification.title");
           message = message != null ? message : extras.getString("body");
@@ -249,10 +248,11 @@ public class GCMIntentService extends IntentService {
 			soundName = soundName.substring(0, soundName.lastIndexOf('.'));
 			Resources r = getResources();
 			int resourceId = r.getIdentifier(soundName, location, this.getPackageName());
-			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
+			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
+			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
 			mBuilder.setSound(soundUri);
 			
-			mBuilder.setContentText("android.resource://" + this.getPackageName() + "/" + resourceId);
+			mBuilder.setContentText("android.resource://" + this.getPackageName() + "/" + soundName);
 		}
 		
 		
