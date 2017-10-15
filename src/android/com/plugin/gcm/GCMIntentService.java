@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
+import java.net.URL;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
