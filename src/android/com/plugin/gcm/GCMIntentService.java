@@ -28,15 +28,6 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import com.plugin.badge.ShortcutBadger;
 
-public class ReplyBroadcastReceiver extends BroadcastReceiver {
- 
-  public static final String KEY_TEXT_REPLY = "key_text_reply";
-  public static final int REPLY_NOTIFICATION_ID = 2;
- 
-  public ReplyBroadcastReceiver() {
-  }
-}
-
 public class GCMIntentService extends IntentService {
   public static int NOTIFICATION_ID = 1;
 
@@ -162,13 +153,6 @@ public class GCMIntentService extends IntentService {
 				.setSummaryText("merh Termine")
 		);
 		
-		PendingIntent replyPendingIntent = PendingIntent.getBroadcast(
-			   this,
-			   0,
-			   new Intent(this, ReplyBroadcastReceiver.class),
-			   PendingIntent.FLAG_UPDATE_CURRENT
-		 );
-		
 		// SMALL ICON
 		String icon = extras.getString("icon");
 		if (icon == null) {
@@ -179,10 +163,8 @@ public class GCMIntentService extends IntentService {
 			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
 			if (rIcon > 0) {
 				mBuilder.setSmallIcon(rIcon);
-				mBuilder.addAction( new Notification.Action.Builder(rIcon, "Call", replyPendingIntent).build() );
 			} else {
 				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
-				mBuilder.addAction( new Notification.Action.Builder(this.getApplicationInfo().icon, "Call", replyPendingIntent).build() );
 			}
 		}
 		
