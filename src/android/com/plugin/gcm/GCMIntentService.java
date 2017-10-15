@@ -143,7 +143,6 @@ public class GCMIntentService extends IntentService {
 			.setContentTitle("Termine")
 			.addLine("Zeile 1")
 			.addLine("Zeile 2")
-			.addLine(events[i])
 			.setSummaryText("merh Termine")
 		);
 		
@@ -241,13 +240,13 @@ public class GCMIntentService extends IntentService {
 
 	private Bitmap getBitmapFromURL(String src) {
 		Bitmap image = null;
+		CharSequence text = "LargeIcon wurde geladen";
 		try {
 			URL url = new URL(src);
 			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-			CharSequence text = "LargeIcon wurde geladen";
 		} catch(IOException e) {
 			// System.out.println(e);
-			CharSequence text = "Fehler beim Laden des Icons";
+			text = "Fehler beim Laden des Icons";
 		}
 		
 		Context context = getApplicationContext();
