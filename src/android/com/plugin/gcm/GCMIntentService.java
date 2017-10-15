@@ -216,7 +216,7 @@ public class GCMIntentService extends IntentService {
 		
 		// MESSAGE COUNT
 		int msgCnt = Integer.parseInt(extras.getString("msgcnt"));
-		if (msgCnt != null) {
+		if (msgCnt != 0) {
 			// mBuilder.setNumber(msgCnt);
 			ShortcutBadger.applyNotification(getApplicationContext(), notification, msgCnt);
 		}
