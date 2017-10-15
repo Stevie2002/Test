@@ -24,6 +24,11 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaArgs;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaResourceApi;
+import org.apache.cordova.PluginResult; 
 
 import java.io.IOException;
 import java.net.URL;
