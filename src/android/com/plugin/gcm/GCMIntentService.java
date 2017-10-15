@@ -75,6 +75,14 @@ public class GCMIntentService extends IntentService {
         if (PushPlugin.isInForeground()) {
           extras.putBoolean("foreground", true);
           PushPlugin.sendExtras(extras);
+
+			Context context = getApplicationContext();
+			CharSequence text = "Hello toast!";
+			int duration = Toast.LENGTH_SHORT;
+
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
+		  
         } else {
           extras.putBoolean("foreground", false);
           String title = extras.getString("title");
@@ -132,11 +140,13 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("bigView")) {
 			CharSequence[] bigView = extras.getCharSequenceArray("bigView");
 			
+			/*
 			mBuilder.setStyle(new Notification.BigTextStyle()
 				.setBigContentTitle("title")
 				.setSummaryText("summary")
 				.bigText(extras.getString("bigView.message"))
 			);
+			*/
 		}
 		/*
 		if (extras.containsKey("bigview")) {
