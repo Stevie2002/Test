@@ -130,6 +130,13 @@ public class GCMIntentService extends IntentService {
 		message = message != null ? message : "<missing message content>";
 		mBuilder.setContentText(message);
 		
+		// GROUP
+		if (extras.containsKey("group")) {
+			mBuilder.setGroup(
+				extras.getString("group")
+			);
+		}
+		
 		// BIG VIEW
 		if (extras.containsKey("bigView.message")) {
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
