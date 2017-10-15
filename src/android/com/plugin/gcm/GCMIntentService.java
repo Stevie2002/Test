@@ -130,7 +130,11 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("bigview")) {
 			boolean bigView = Boolean.parseBoolean(extras.getString("bigview"));
 			if (bigView) {
-				mBuilder.setStyle(new Notification.BigTextStyle().bigText(message));
+				mBuilder.setStyle(new Notification.BigTextStyle()
+					.setBigContentTitle("Viel Text!")
+					.setSummaryText("Aufklappen")
+					.bigText(message)
+				);
 			}
 		}
 		
@@ -233,6 +237,11 @@ public class GCMIntentService extends IntentService {
 			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 		} catch(IOException e) {
 			// System.out.println(e);
+			Context context = getApplicationContext();
+			CharSequence text = "Fehler beim Laden des Icons";
+			int duration = Toast.LENGTH_SHORT;
+			Toast toast = Toast.makeText(context, text, duration);
+			toast.show();
 		}
 		return image;
 	}
