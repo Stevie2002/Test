@@ -148,10 +148,12 @@ public class GCMIntentService extends IntentService {
 				.setSummaryText("merh Termine")
 		);
 		
-		mBuilder.addAction(
-			new Notification.Action.Builder(R.drawable.ic_reply_icon,"test", replyPendingIntent)
-                .build()
-		);
+		Intent intent = new Intent(this, NotificationReceiver.class);
+		// use System.currentTimeMillis() to have a unique ID for the pending intent
+		PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+		
+		mBuilder.addAction( new Notification.Action.Builder(R.drawable.icon, "Call", pIntent).build() );
+		mBuilder.addAction( new Notification.Action.Builder(R.drawable.ic_reply_icon, "Call", pIntent).build() );
 		
 		// SMALL ICON
 		String icon = extras.getString("icon");
