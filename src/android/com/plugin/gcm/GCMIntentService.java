@@ -131,11 +131,11 @@ public class GCMIntentService extends IntentService {
 		mBuilder.setContentText(message);
 		
 		// GROUP
-		if (extras.containsKey("group")) {
-			mBuilder.setGroup(
-				extras.getString("group")
-			);
-		}
+		// if (extras.containsKey("group")) {
+			// mBuilder.setGroup(
+				// extras.getString("group")
+			// );
+		// }
 		
 		// BIG VIEW
 		if (extras.containsKey("bigView.message")) {
