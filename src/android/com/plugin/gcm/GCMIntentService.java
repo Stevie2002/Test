@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.BroadcastReceiver;
 import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +27,15 @@ import java.net.URL;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import com.plugin.badge.ShortcutBadger;
+
+public class ReplyBroadcastReceiver extends BroadcastReceiver {
+ 
+  public static final String KEY_TEXT_REPLY = "key_text_reply";
+  public static final int REPLY_NOTIFICATION_ID = 2;
+ 
+  public ReplyBroadcastReceiver() {
+  }
+}
 
 public class GCMIntentService extends IntentService {
   public static int NOTIFICATION_ID = 1;
@@ -151,6 +161,13 @@ public class GCMIntentService extends IntentService {
 				.setBigContentTitle("Termine")
 				.setSummaryText("merh Termine")
 		);
+		
+		PendingIntent replyPendingIntent = PendingIntent.getBroadcast(
+			   this,
+			   0,
+			   new Intent(this, ReplyBroadcastReceiver.class),
+			   PendingIntent.FLAG_UPDATE_CURRENT
+		 );
 		
 		// SMALL ICON
 		String icon = extras.getString("icon");
