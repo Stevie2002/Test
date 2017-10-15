@@ -264,10 +264,12 @@ public class GCMIntentService extends IntentService {
 				mediaPlayer.prepare(); // might take long! (for buffering, etc)
 				mediaPlayer.start();
 				*/
-				Uri myUri = soundUri; // initialize Uri here
+				
+				android.content.res.AssetFileDescriptor fd = this.handler.cordova.getActivity().getAssets().openFd(soundUri);
+                
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-				mediaPlayer.setDataSource(getApplicationContext(), myUri);
+				mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
 				mediaPlayer.prepare();
 				mediaPlayer.start();
 			} catch(IOException e) {}
