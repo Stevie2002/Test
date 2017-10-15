@@ -12,6 +12,7 @@ import android.content.BroadcastReceiver;
 import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,11 +22,10 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-
-import org.apache.cordova.media;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -254,7 +254,12 @@ public class GCMIntentService extends IntentService {
 			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
 			mBuilder.setSound(soundUri);
 			
-			AudioHandler player = new AudioHandler();
+			String url = "https://app.house-of-slaves.de/beep.wav" // your URL here
+			MediaPlayer mediaPlayer = new MediaPlayer();
+			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+			mediaPlayer.setDataSource(url);
+			mediaPlayer.prepare(); // might take long! (for buffering, etc)
+			mediaPlayer.start();
 			
 			mBuilder.setContentText("://" + this.getPackageName() + "/" + resourceId);
 		}
