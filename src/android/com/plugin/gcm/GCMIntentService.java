@@ -174,7 +174,7 @@ public class GCMIntentService extends IntentService {
 			Resources r = getResources();
 			int resourceId = r.getIdentifier(soundName, location, this.getPackageName());
 			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
-			mBuilder.setSound(soundUri,USAGE_NOTIFICATION);
+			mBuilder.setSound(soundUri);
 		}
 		
 		// LIGHTS
