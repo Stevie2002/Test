@@ -295,7 +295,7 @@ public class GCMIntentService extends IntentService {
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
 		
-		NotificationCompat.Builder builderThree = new Notification.Builder(this)
+		Notification.Builder builderThree = new Notification.Builder(this)
 			.setTicker("GROU TEST")
 			.setGroupSummary(true)
 			.setGroup("testgroup");
