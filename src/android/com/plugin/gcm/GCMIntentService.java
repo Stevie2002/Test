@@ -302,9 +302,8 @@ public class GCMIntentService extends IntentService {
 		ShortcutBadger.applyCount(this, msgCnt);
 		ShortcutBadger.applyNotification(this, notification, msgCnt);
 		
-		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
+		// mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
-		NOTIFICATION_ID += 1;
 		mNotificationManager.notify(appName, NOTIFICATION_ID, new Notification.Builder(this)
 			.setContentTitle("GROUP TEST")
 			.setContentText("Message ...")
