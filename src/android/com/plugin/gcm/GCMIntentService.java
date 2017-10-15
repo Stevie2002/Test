@@ -306,22 +306,22 @@ public class GCMIntentService extends IntentService {
 		
 		mNotificationManager.notify(appName, 10, new Notification.Builder(this)
 			.setContentTitle("GROUP TEST")
-			.setContentText("")
+			.setContentText("Message ...")
 			.setGroupSummary(true)
 			.setGroup("testgroup").build()
 		);
 		
-		mNotificationManager.notify(appName, 11, new Notification.Builder(this)
-			.setContentTitle("ONLY TITLE")
-			.setGroupSummary(true)
-			.setGroup("testgroup").build()
-		);
+		// mNotificationManager.notify(appName, 11, new Notification.Builder(this)
+			// .setContentTitle("ONLY TITLE")
+			// .setGroupSummary(true)
+			// .setGroup("testgroup").build()
+		// );
 		
-		mNotificationManager.notify(appName, 12, new Notification.Builder(this)
-			.setContentTitle("ONLY MESSAGE")
-			.setGroupSummary(true)
-			.setGroup("testgroup").build()
-		);
+		// mNotificationManager.notify(appName, 12, new Notification.Builder(this)
+			// .setContentTitle("ONLY MESSAGE")
+			// .setGroupSummary(true)
+			// .setGroup("testgroup").build()
+		// );
 	}
 
 	private Bitmap getBitmapFromURL(String src) {
