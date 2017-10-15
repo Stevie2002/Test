@@ -153,7 +153,7 @@ public class GCMIntentService extends IntentService {
 		}
 		
 		// MESSAGES
-			int timestamp = Integer.parseInt(extras.getString("timestamp"))
+			int timestamp = Integer.parseInt(extras.getString("timestamp"));
 			mBuilder.setStyle(new Notification.MessagingStyle("Me")
 				.setConversationTitle("Team lunch")
 				.addMessage("Hi", timestamp, null) // Pass in null for user.
