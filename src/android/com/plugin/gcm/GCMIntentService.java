@@ -135,7 +135,7 @@ public class GCMIntentService extends IntentService {
 			
 			mBuilder.setStyle(new Notification.BigTextStyle()
 				// .setBigContentTitle("title")
-				.setSummaryText(extras.getStringArrayList("bigView").getClass())
+				.setSummaryText(extras.getStringArrayList("bigView").getClass().getName())
 				// .setSummaryText("summary")
 				// .bigText(extras.getString("bigView.message"))
 			);
