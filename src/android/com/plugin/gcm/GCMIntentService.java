@@ -143,6 +143,20 @@ public class GCMIntentService extends IntentService {
 				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
 			}
 		}
+		// SMALL LARGE ICON
+		String icon = extras.getString("icon");
+		if (icon == null) {
+			mBuilder.setLargeIcon(this.getApplicationInfo().icon);
+		} else {
+			String location = extras.getString("iconLocation");
+			location = location != null ? location : "drawable";
+			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
+			if (rIcon > 0) {
+				mBuilder.setLargeIcon(rIcon);
+			} else {
+				mBuilder.setLargeIcon(this.getApplicationInfo().icon);
+			}
+		}
 		
 		// ICON COLOR #RRGGBB or #AARRGGBB
 		String iconColor = extras.getString("iconColor");
@@ -216,11 +230,8 @@ public class GCMIntentService extends IntentService {
 		
 		// MESSAGE COUNT
 		int msgCnt = Integer.parseInt(extras.getString("msgcnt"));
-		if (msgCnt != 0) {
-			// mBuilder.setNumber(msgCnt);
-			ShortcutBadger.applyCount(this, msgCnt);
-			ShortcutBadger.applyNotification(getApplicationContext(), notification, msgCnt);
-		}
+		ShortcutBadger.applyCount(this, msgCnt);
+		ShortcutBadger.applyNotification(this, notification, msgCnt);
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 	}
