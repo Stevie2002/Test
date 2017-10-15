@@ -256,11 +256,19 @@ public class GCMIntentService extends IntentService {
 			mBuilder.setSound(soundUri);
 			
 			try {
+				/*
 				String url = "https://app.house-of-slaves.de/beep.wav"; // your URL here
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 				mediaPlayer.setDataSource(url);
 				mediaPlayer.prepare(); // might take long! (for buffering, etc)
+				mediaPlayer.start();
+				*/
+				Uri myUri = soundName; // initialize Uri here
+				MediaPlayer mediaPlayer = new MediaPlayer();
+				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+				mediaPlayer.setDataSource(getApplicationContext(), myUri);
+				mediaPlayer.prepare();
 				mediaPlayer.start();
 			} catch(IOException e) {}
 			
