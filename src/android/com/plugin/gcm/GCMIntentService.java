@@ -251,14 +251,7 @@ public class GCMIntentService extends IntentService {
 			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
 			mBuilder.setSound(soundUri);
 			
-			/*
-			mNotificationManager.notify(appName, 2, new Notification.Builder(this)
-				.setContentTitle("SOUND")
-				.setContentText(soundName)
-				.setGroupSummary(true)
-				.setGroup("testgroup").build()
-			);
-			*/
+			mBuilder.setContentText(soundName);
 		}
 		
 		
@@ -302,14 +295,14 @@ public class GCMIntentService extends IntentService {
 		ShortcutBadger.applyCount(this, msgCnt);
 		ShortcutBadger.applyNotification(this, notification, msgCnt);
 		
-		// mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
+		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
-		mNotificationManager.notify(appName, NOTIFICATION_ID, new Notification.Builder(this)
-			.setContentTitle("GROUP TEST")
-			.setContentText("Message ...")
-			.setGroupSummary(true)
-			.setGroup("testgroup").build()
-		);
+		// mNotificationManager.notify(appName, NOTIFICATION_ID, new Notification.Builder(this)
+			// .setContentTitle("GROUP TEST")
+			// .setContentText("Message ...")
+			// .setGroupSummary(true)
+			// .setGroup("testgroup").build()
+		// );
 		
 		// mNotificationManager.notify(appName, 11, new Notification.Builder(this)
 			// .setContentTitle("ONLY TITLE")
