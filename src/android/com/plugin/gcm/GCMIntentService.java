@@ -129,6 +129,16 @@ public class GCMIntentService extends IntentService {
 		mBuilder.setContentText(message);
 		
 		// BIG VIEW
+		if (extras.containsKey("bigView")) {
+			CharSequence[] bigView = extras.getCharSequenceArray("bigView");
+			
+			mBuilder.setStyle(new Notification.BigTextStyle()
+				.setBigContentTitle(bigView.getString("title"))
+				.setSummaryText(bigView.getString("summary"))
+				.bigText(bigView.getString("message"))
+			);
+		}
+		/*
 		if (extras.containsKey("bigview")) {
 			boolean bigView = Boolean.parseBoolean(extras.getString("bigview"));
 			if (bigView) {
@@ -147,7 +157,7 @@ public class GCMIntentService extends IntentService {
 				.setBigContentTitle("Termine")
 				.setSummaryText("merh Termine")
 		);
-		
+		*/
 		// SMALL ICON
 		String icon = extras.getString("icon");
 		if (icon == null) {
