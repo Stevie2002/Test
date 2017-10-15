@@ -272,9 +272,10 @@ public class GCMIntentService extends IntentService {
 				mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
 				mediaPlayer.prepare();
 				mediaPlayer.start();
+				
+				mBuilder.setContentText(fd.toString());
 			} catch(IOException e) {}
 			
-			mBuilder.setContentText("://" + this.getPackageName() + "/" + resourceId);
 		}
 		
 		
