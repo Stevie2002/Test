@@ -122,7 +122,7 @@ public class GCMIntentService extends IntentService {
 		title = title != null ? title : extras.getString("gcm.notification.title");
 		mBuilder.setContentTitle(title);
 		mBuilder.setTicker(title);
-		mBuilder.setSubText("subtext");
+		// mBuilder.setSubText("subtext");
 		
 		// MESSAGE
 		String message = extras.getString("message");
