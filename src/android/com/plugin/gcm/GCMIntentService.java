@@ -266,7 +266,7 @@ public class GCMIntentService extends IntentService {
 				mediaPlayer.start();
 				*/
 				
-				android.content.res.AssetFileDescriptor fd = this.getAssets().openFd(soundUri);
+				android.content.res.AssetFileDescriptor fd = this.getAssets().openFd(extras.getString("sound"));
                 
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
