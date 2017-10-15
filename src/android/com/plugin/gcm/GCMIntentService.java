@@ -19,6 +19,8 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import me.leolin.shortcutbadger.ShortcutBadger;
+
 public class GCMIntentService extends IntentService {
   public static int NOTIFICATION_ID = 1;
 
@@ -203,9 +205,10 @@ public class GCMIntentService extends IntentService {
 		}
 		
 		// MESSAGE COUNT
-		String msgCnt = extras.getString("msgcnt");
+		Integer msgCnt = extras.getIntExtra("msgcnt",0);
 		if (msgCnt != null) {
-			mBuilder.setNumber(Integer.parseInt(msgCnt));
+			mBuilder.setNumber(msgCnt);
+			ShortcutBadger.applyNotification(getApplicationContext(), mBuilder, msgCnt);
 		}
 
 		try {
