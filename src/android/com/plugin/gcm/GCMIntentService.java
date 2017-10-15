@@ -15,7 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
-// import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -94,7 +94,7 @@ public class GCMIntentService extends IntentService {
 		
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 	
-		Notification mBuilder = new Notification.Builder(this);
+		mBuilder = new Notification.Builder(this);
 		
 		mBuilder.setWhen(System.currentTimeMillis());
 		mBuilder.setContentIntent(contentIntent);
