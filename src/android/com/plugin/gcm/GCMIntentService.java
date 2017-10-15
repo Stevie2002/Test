@@ -162,13 +162,13 @@ public class GCMIntentService extends IntentService {
 			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
 			if (rIcon > 0) {
 				mBuilder.setSmallIcon(rIcon);
+				mBuilder.addAction( new Notification.Action.Builder(rIcon, "Call", replyPendingIntent).build() );
 			} else {
 				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
+				mBuilder.addAction( new Notification.Action.Builder(this.getApplicationInfo().icon, "Call", replyPendingIntent).build() );
 			}
 		}
 		
-		mBuilder.addAction( new Notification.Action.Builder(this.getApplicationInfo().icon, "Call", replyPendingIntent).build() );
-		mBuilder.addAction( new Notification.Action.Builder(this.getApplicationInfo().icon, "Call", replyPendingIntent).build() );
 		
 		// ICON COLOR #RRGGBB or #AARRGGBB
 		String iconColor = extras.getString("iconColor");
