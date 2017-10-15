@@ -152,6 +152,15 @@ public class GCMIntentService extends IntentService {
 			mBuilder.setStyle(bigViewBuilder);
 		}
 		
+		// MESSAGES
+			int timestamp = Integer.parseInt(extras.getString("timestamp"))
+			mBuilder.setStyle(new Notification.MessagingStyle("Me")
+				.setConversationTitle("Team lunch")
+				.addMessage("Hi", timestamp, null) // Pass in null for user.
+				.addMessage("What's up?", timestamp, "Coworker")
+				.addMessage("Not much", timestamp, null)
+				.addMessage("How about lunch?", timestamp, "Coworker"))
+			);
 			
 		/*
 		if (extras.containsKey("bigview")) {
