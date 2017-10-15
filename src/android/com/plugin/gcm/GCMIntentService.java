@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -130,32 +131,17 @@ public class GCMIntentService extends IntentService {
 		}
 		
 		// SMALL ICON
-		String smallIcon = extras.getString("icon");
-		if (smallIcon == null) {
+		String icon = extras.getString("icon");
+		if (icon == null) {
 			mBuilder.setSmallIcon(this.getApplicationInfo().icon);
 		} else {
 			String location = extras.getString("iconLocation");
 			location = location != null ? location : "drawable";
-			int rSmallIcon = this.getResources().getIdentifier(smallIcon.substring(0, smallIcon.lastIndexOf('.')), location, this.getPackageName());
-			if (rSmallIcon > 0) {
-				mBuilder.setSmallIcon(rSmallIcon);
+			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
+			if (rIcon > 0) {
+				mBuilder.setSmallIcon(rIcon);
 			} else {
 				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
-			}
-		}
-		
-		// SMALL LARGE ICON
-		String largeIcon = extras.getString("icon");
-		if (largeIcon == null) {
-			mBuilder.setLargeIcon(this.getApplicationInfo().icon);
-		} else {
-			String location = extras.getString("iconLocation");
-			location = location != null ? location : "drawable";
-			int rLargeIcon = this.getResources().getIdentifier(largeIcon.substring(0, largeIcon.lastIndexOf('.')), location, this.getPackageName());
-			if (rLargeIcon > 0) {
-				mBuilder.setLargeIcon(rLargeIcon);
-			} else {
-				mBuilder.setLargeIcon(this.getApplicationInfo().icon);
 			}
 		}
 		
@@ -165,22 +151,21 @@ public class GCMIntentService extends IntentService {
 			mBuilder.setColor(Color.parseColor(iconColor));
 		}
 
-    // LARGE ICON
-    // TODO: http://stackoverflow.com/questions/24840282/load-image-from-url-in-notification-android
-	// String image = extras.getString("image");
-	// Bitmap largeIcon;
-	// if (image != null) {
-	 // if (image.startsWith("http")) {
-	   // largeIcon = getBitmapFromURL(image);
-	 // } else {
-	   // // will play /platform/android/res/raw/image
-	   // largeIcon = BitmapFactory.decodeResource(getResources(), this.getResources().getIdentifier(image, null, null));
-	 // }
-
-	 // if (largeIcon != null) {
-	   // mBuilder.setLargeIcon(largeIcon);
-	 // }
-	// }
+		// LARGE ICON
+		// TODO: http://stackoverflow.com/questions/24840282/load-image-from-url-in-notification-android
+		String image = extras.getString("image");
+		Bitmap largeIcon;
+		if (image != null) {
+			if (image.startsWith("http")) {
+				largeIcon = getBitmapFromURL(image);
+			} else {
+				// will play /platform/android/res/raw/image
+				largeIcon = BitmapFactory.decodeResource(getResources(), this.getResources().getIdentifier(image, null, null));
+			}
+			if (largeIcon != null) {
+				mBuilder.setLargeIcon(largeIcon);
+			}
+		}
 		
 		// SOUND (from /platform/android/res/raw/sound)
 		String soundName = extras.getString("sound");
