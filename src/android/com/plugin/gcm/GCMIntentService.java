@@ -255,8 +255,6 @@ public class GCMIntentService extends IntentService {
 			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
 			mBuilder.setSound(soundUri);
 			
-			AssetFileDescriptor fd = getAssets().openFd(extras.getString("sound"));
-			mBuilder.setContentText(fd.toString());
 			
 			try {
 				/*
@@ -268,13 +266,16 @@ public class GCMIntentService extends IntentService {
 				mediaPlayer.start();
 				*/
 				
+				AssetFileDescriptor fd = getAssets().openFd(extras.getString("sound"));
+				mBuilder.setContentText(fd.toString());
                 
+				/*
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 				mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
 				mediaPlayer.prepare();
 				mediaPlayer.start();
-				
+				*/
 			} catch(IOException e) {}
 			
 		}
