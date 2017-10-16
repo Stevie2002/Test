@@ -119,19 +119,6 @@ public class GCMIntentService extends IntentService {
 			NOTIFICATION_ID += 1;
 		}
 		
-		Notification groupBuilder =
-            new Notification.Builder(this)
-				.setContentTitle("Group Title")
-				.setContentText("Group Content")
-				.setGroupSummary(true)
-				.setGroup("GROUP_1")
-				.setWhen(System.currentTimeMillis())
-				.setContentIntent(contentIntent)
-				.build();
-		
-		mNotificationManager.notify(appName, NOTIFICATION_ID, groupBuilder);
-		
-		/*
 		Notification.Builder mBuilder = new Notification.Builder(this);
 		
 		mBuilder.setWhen(System.currentTimeMillis());
@@ -278,7 +265,7 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("progress")) {
 			mBuilder.setProgress(100,25,false);
 		}
-		*/
+		
 		// MESSAGES
 		/*
 		int timestamp = Integer.parseInt(extras.getString("timestamp"));
@@ -311,7 +298,7 @@ public class GCMIntentService extends IntentService {
 				.setSummaryText("merh Termine")
 		);
 		*/
-		/*
+		
 		// SOUND
 		if (extras.containsKey("sound")) {
 			String sound = extras.getString("sound");
@@ -422,7 +409,6 @@ public class GCMIntentService extends IntentService {
 		int msgCnt = Integer.parseInt(extras.getString("msgcnt"));
 		ShortcutBadger.applyCount(this, msgCnt);
 		ShortcutBadger.applyNotification(this, notification, msgCnt);
-		*/
 	}
 
 	private Bitmap getBitmapFromURL(String src) {
