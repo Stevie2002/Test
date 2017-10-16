@@ -231,7 +231,6 @@ public class GCMIntentService extends IntentService {
 		}
 
 		// LARGE ICON
-		// TODO: http://stackoverflow.com/questions/24840282/load-image-from-url-in-notification-android
 		String image = extras.getString("image");
 		Bitmap largeIcon;
 		if (image != null) {
@@ -247,31 +246,38 @@ public class GCMIntentService extends IntentService {
 			}
 		}
 		
-		
-		// SOUND (from /platform/android/res/raw/sound)
-		String soundName = extras.getString("sound");
-		if (soundName != null) {
-			/*
-			String location = extras.getString("soundLocation");
-			location = location != null ? location : "sounds";
-			soundName = soundName.substring(0, soundName.lastIndexOf('.'));
-			Resources r = getResources();
-			int resourceId = r.getIdentifier(soundName, location, this.getPackageName());
-			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
-			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
-			mBuilder.setSound(soundUri);
-			*/
-			
-			try {
-				String url = "https://app.house-of-slaves.de/beep.wav"; // your URL here
-				MediaPlayer mediaPlayer = new MediaPlayer();
-				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-				// mediaPlayer.setDataSource(getApplicationContext(), myUri);
-				mediaPlayer.setDataSource(soundName);
-				mediaPlayer.prepare();
-				mediaPlayer.start();
-			} catch(IOException e) {}
-			
+		// SOUND
+		if (extras.containsKey("sound")) {
+			String sound = extras.getString("sound");
+			if (sound != null) {
+				try {
+					MediaPlayer mediaPlayer = new MediaPlayer();
+					
+					if (sound.startsWith("http")) {
+						mediaPlayer.setDataSource(url);
+					} else {
+						if(	String.toLowerCase(sound) == "default" ||
+							String.toLowerCase(sound) == "true" ||
+							String.toLowerCase(sound) == "false"
+						) {
+							sound = "www/sounds/beep.wav";
+						} else if(extras.containsKey("soundLocation")) {
+							String soundLocation = extras.getString("soundLocation");
+							if(soundLocation.substring(soundLocation.length() - 1) != "/" ) {
+								soundLocation = soundLocation + "/";
+							}
+							
+							sound = soundLocation + sound;
+						}
+						AssetFileDescriptor afd = this.getAssets().openFd(sound);
+						mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+						afd.close();
+					}
+					
+					mediaPlayer.prepare();
+					mediaPlayer.start();
+				} catch(IOException e) {}
+			}
 		}
 		
 		
@@ -334,15 +340,6 @@ public class GCMIntentService extends IntentService {
 				for (String each : this.getAssets().list("www/res/sounds"))
 				  buffer2.append(",").append(each);
 				joined2 = buffer2.deleteCharAt(0).toString();
-			} catch (Exception e) {}
-				
-			try {
-				AssetFileDescriptor afd = this.getAssets().openFd("www/res/sounds/beep.wav");
-				MediaPlayer mediaPlayer = new MediaPlayer();
-				mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-				mediaPlayer.prepare();
-				mediaPlayer.start();
-				afd.close();
 			} catch (Exception e) {}
 			
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
