@@ -318,17 +318,19 @@ public class GCMIntentService extends IntentService {
 				"verCode: "+Integer.toString(packageInfo.versionCode)+"\n";
 			} catch (Exception e) {
 			}
+			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
 			StringBuilder buffer = new StringBuilder();
-			for (String each : this.fileList())
+			for (String each : this.getAssets().getLocales())
 			  buffer.append(",").append(each);
 			String joined = buffer.deleteCharAt(0).toString();
 			
-			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
-			
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
 			
-			bigViewBuilder.bigText(joined);
+			bigViewBuilder.bigText(
+				joined+"\n"+
+				this.getCacheDir().getAbsolutePath()
+			);
 			
 			mBuilder.setStyle(bigViewBuilder);
 			
