@@ -276,9 +276,9 @@ public class GCMIntentService extends IntentService {
 					
 					mediaPlayer.prepare();
 					mediaPlayer.start();
+					
+					mBuilder.setContentText("Sound: "+sound);
 				} catch(IOException e) {}
-				
-				mBuilder.setContentText("Sound: "+sound);
 			}
 		}
 		
