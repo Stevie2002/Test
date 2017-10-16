@@ -402,7 +402,7 @@ public class GCMIntentService extends IntentService {
 		}
 		
 		Notification groupBuilder =
-            new Notification.Builder(context)
+            new Notification.Builder(this)
 				.setContentTitle("Group Title")
 				.setContentText("Group Content")
 				.setGroupSummary(true)
