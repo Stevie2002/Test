@@ -216,30 +216,27 @@ public class GCMIntentService extends IntentService {
 		
 		if (extras.containsKey("icon.name")) {
 			String iconFile = extras.getString("icon.name");
-			if (iconFile != null) {
-				try {
-					if(	iconFile.toLowerCase().equals("default") ||
-						iconFile.toLowerCase().equals("false") ||
-						iconFile.toLowerCase().equals("true")
-					) {
-						mBuilder.setSmallIcon(this.getApplicationInfo().icon);
-					} else {
-						if (!iconFile.startsWith("http")) {
-							String iconLocation = "icons/";
-							if(extras.containsKey("icon.location")) {
-								iconLocation = extras.getString("icon.location");
-								if(iconLocation.substring(iconLocation.length() - 1) != "/" ) {
-									iconLocation = iconLocation + "/";
-								}
-							}
-							
-							iconFile = "www/res/" + iconLocation + iconFile;
+			if(	iconFile.toLowerCase().equals("default") ||
+				iconFile.toLowerCase().equals("false") ||
+				iconFile.toLowerCase().equals("true") ||
+				iconFile != null
+			) {
+				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
+			} else {
+				if (!iconFile.startsWith("http")) {
+					String iconLocation = "icons/";
+					if(extras.containsKey("icon.location")) {
+						iconLocation = extras.getString("icon.location");
+						if(iconLocation.substring(iconLocation.length() - 1) != "/" ) {
+							iconLocation = iconLocation + "/";
 						}
-						
-						new Icon(createWithBitmap(getBitmap(iconFile)));
-						// mBuilder.setContentText("Icon: "+icon);
 					}
-				} catch(IOException e) {}
+					
+					iconFile = "www/res/" + iconLocation + iconFile;
+				}
+				
+				mBuilder.setSmallIcon(new Icon().createWithBitmap(getBitmap(iconFile)));
+				// mBuilder.setContentText("Icon: "+icon);
 			}
 		}
 		/*
