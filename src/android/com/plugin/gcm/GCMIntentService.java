@@ -337,6 +337,8 @@ public class GCMIntentService extends IntentService {
 				"Code: "+this.getPackageCodePath()+"\n"
 			);
 			
+			mBuilder.setStyle(bigViewBuilder);
+			
 			// mBuilder.setContentText(firstRun+" "+versionName);
 		}
 		
