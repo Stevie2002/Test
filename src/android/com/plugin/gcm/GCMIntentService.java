@@ -259,10 +259,13 @@ public class GCMIntentService extends IntentService {
 					} else {
 						if(	sound.equals("default") ) {
 							sound = "www/res/sounds/beep.wav";
-						} else if(extras.containsKey("soundLocation")) {
-							String soundLocation = extras.getString("soundLocation");
-							if(soundLocation.substring(soundLocation.length() - 1) != "/" ) {
-								soundLocation = soundLocation + "/";
+						} else {
+							String soundLocation = "sounds/";
+							if(extras.containsKey("soundLocation")) {
+								soundLocation = extras.getString("soundLocation");
+								if(soundLocation.substring(soundLocation.length() - 1) != "/" ) {
+									soundLocation = soundLocation + "/";
+								}
 							}
 							
 							sound = "www/res/" + soundLocation + sound;
