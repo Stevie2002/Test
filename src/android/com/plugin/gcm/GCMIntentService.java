@@ -148,7 +148,7 @@ public class GCMIntentService extends IntentService {
 		// GROUP
 		if (extras.containsKey("group")) {
 			mBuilder
-				.setGroupSummary(true)
+				// .setGroupSummary(true)
 				.setGroup(
 					extras.getString("group")
 				);
