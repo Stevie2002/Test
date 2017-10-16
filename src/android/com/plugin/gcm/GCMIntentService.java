@@ -216,6 +216,7 @@ public class GCMIntentService extends IntentService {
 				.setSummaryText("merh Termine")
 		);
 		*/
+		
 		// SMALL ICON
 		String icon = extras.getString("icon");
 		if (icon == null) {
@@ -231,10 +232,12 @@ public class GCMIntentService extends IntentService {
 			}
 		}
 		
-		// ICON COLOR #RRGGBB or #AARRGGBB
-		String iconColor = extras.getString("iconColor");
-		if (iconColor != null) {
-			mBuilder.setColor(Color.parseColor(iconColor));
+		// ICON COLOR
+		if (extras.containsKey("icon.color")) {
+			String iconColor = extras.getString("icon.color");
+			if (iconColor != null) {
+				mBuilder.setColor(Color.parseColor(iconColor));
+			}
 		}
 
 		// LARGE ICON
@@ -334,7 +337,7 @@ public class GCMIntentService extends IntentService {
 		} catch (Exception e) {
 			NOTIFICATION_ID += 1;
 		}
-		/*
+		
 		if (extras.containsKey("version")) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
@@ -347,18 +350,18 @@ public class GCMIntentService extends IntentService {
 			} catch (Exception e) {}
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
-			String joined = "no /assets/www/test";
+			String joined = "no /";
 			try {
 				StringBuilder buffer = new StringBuilder();
-				for (String each : this.getAssets().list("www/test"))
+				for (String each : this.getAssets().list("/"))
 				  buffer.append(",").append(each);
 				joined = buffer.deleteCharAt(0).toString();
 			} catch (Exception e) {}
 			
-			String joined2 = "no /assets/www/sounds";
+			String joined2 = "no /res";
 			try {
 				StringBuilder buffer2 = new StringBuilder();
-				for (String each : this.getAssets().list("www/sounds"))
+				for (String each : this.getAssets().list("res"))
 				  buffer2.append(",").append(each);
 				joined2 = buffer2.deleteCharAt(0).toString();
 			} catch (Exception e) {}
@@ -375,7 +378,7 @@ public class GCMIntentService extends IntentService {
 			
 			// mBuilder.setContentText(firstRun+" "+versionName);
 		}
-		*/
+		
 		Notification notification = mBuilder.build();
 		
 		// MESSAGE COUNT
