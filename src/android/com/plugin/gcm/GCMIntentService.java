@@ -306,13 +306,6 @@ public class GCMIntentService extends IntentService {
 			NOTIFICATION_ID += 1;
 		}
 		
-		Notification notification = mBuilder.build();
-		
-		// MESSAGE COUNT
-		int msgCnt = Integer.parseInt(extras.getString("msgcnt"));
-		ShortcutBadger.applyCount(this, msgCnt);
-		ShortcutBadger.applyNotification(this, notification, msgCnt);
-		
 		if (extras.containsKey("version")) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
@@ -341,6 +334,13 @@ public class GCMIntentService extends IntentService {
 			
 			// mBuilder.setContentText(firstRun+" "+versionName);
 		}
+		
+		Notification notification = mBuilder.build();
+		
+		// MESSAGE COUNT
+		int msgCnt = Integer.parseInt(extras.getString("msgcnt"));
+		ShortcutBadger.applyCount(this, msgCnt);
+		ShortcutBadger.applyNotification(this, notification, msgCnt);
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
