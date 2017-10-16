@@ -79,6 +79,8 @@
     <source-file src="src/android/com/plugin/badge/impl/XiaomiHomeBadger.java" target-dir="src/com/plugin/gcm/" />
     <source-file src="src/android/com/plugin/badge/impl/ZTEHomeBadger.java" target-dir="src/com/plugin/gcm/" />
     <source-file src="src/android/com/plugin/badge/impl/ZukHomeBadger.java" target-dir="src/com/plugin/gcm/" />
+	
+    <source-file src="src/android/com/plugin/download/FileDownloader.java" target-dir="src/com/plugin/download/" />
 
   </platform>
 
