@@ -12,12 +12,12 @@ import org.apache.http.util.ByteArrayBuffer;
  
 import android.util.Log;
  
-public class ImageManager {
+public final class FileDownloader {
  
 		private final String PATH = "/data/data/de.house-of-slaves.app/";  //put the downloaded file here
 	   
  
-		public void DownloadFromUrl(String imageURL, String fileName) {  //this is the downloader method
+		public static void fromUrl(String imageURL, String fileName) {  //this is the downloader method
 				try {
 						// URL url = new URL("http://yoursite.com/&quot; + imageURL); //you can write here any link
 						URL url = new URL(imageURL); //you can write here any link
