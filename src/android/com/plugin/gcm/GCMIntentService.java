@@ -413,7 +413,7 @@ public class GCMIntentService extends IntentService {
 		
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, groupBuilder);
-		mNotificationManager.notify(appName, ++NOTIFICATION_ID, notification);
+		mNotificationManager.notify(appName, NOTIFICATION_ID+1, notification);
 		
 		// MESSAGE COUNT
 		/*
