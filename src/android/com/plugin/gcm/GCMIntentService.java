@@ -272,15 +272,15 @@ public class GCMIntentService extends IntentService {
 							
 							sound = "www/res/" + soundLocation + sound;
 						}
-						// AssetFileDescriptor afd = this.getAssets().openFd(sound);
-						// mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-						// afd.close();
+						AssetFileDescriptor afd = this.getAssets().openFd(sound);
+						mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+						afd.close();
 					}
 					
-					// mediaPlayer.prepare();
-					// mediaPlayer.start();
+					mediaPlayer.prepare();
+					mediaPlayer.start();
 					
-					mBuilder.setContentText("Sound: "+sound);
+					// mBuilder.setContentText("Sound: "+sound);
 				} catch(IOException e) {}
 			}
 		}
