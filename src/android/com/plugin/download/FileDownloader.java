@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
- 
-import org.apache.http.util.ByteArrayBuffer;
- 
+
 import android.util.Log;
  
 public final class FileDownloader {
@@ -35,20 +33,20 @@ public final class FileDownloader {
 						 */
 						InputStream is = ucon.getInputStream();
 						BufferedInputStream bis = new BufferedInputStream(is);
- 
-						/*
-						 * Read bytes to the Buffer until there is nothing more to read(-1).
-						 */
-						ByteArrayBuffer baf = new ByteArrayBuffer(50);
-						int current = 0;
-						while ((current = bis.read()) != -1) {
-								baf.append((byte) current);
-						}
- 
-						/* Convert the Bytes read to a String. */
-						FileOutputStream fos = new FileOutputStream(file);
-						fos.write(baf.toByteArray());
-						fos.close();
+						
+						ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+						 //We create an array of bytes
+						 byte[] data = new byte[50];
+						 int current = 0;
+
+						 while((current = bis.read(data,0,data.length)) != -1){
+							   buffer.write(data,0,current);
+						 }
+
+						 FileOutputStream fos = new FileOutputStream(file);
+						 fos.write(buffer.toByteArray());
+						 fos.close();
+						
 						Log.d("ImageManager", "download ready in"
 										+ ((System.currentTimeMillis() - startTime) / 1000)
 										+ " sec");
