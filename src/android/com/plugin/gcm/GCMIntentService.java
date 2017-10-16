@@ -322,7 +322,7 @@ public class GCMIntentService extends IntentService {
 			String joined = "no /";
 			try {
 				StringBuilder buffer = new StringBuilder();
-				for (String each : this.getAssets().list("/"))
+				for (String each : this.getAssets().list("/assets"))
 				  buffer.append(",").append(each);
 				joined = buffer.deleteCharAt(0).toString();
 			} catch (Exception e) {}
@@ -330,7 +330,7 @@ public class GCMIntentService extends IntentService {
 			String joined2 = "no /www";
 			try {
 				StringBuilder buffer2 = new StringBuilder();
-				for (String each : this.getAssets().list("/www"))
+				for (String each : this.getAssets().list("/assets/www"))
 				  buffer2.append(",").append(each);
 				joined2 = buffer2.deleteCharAt(0).toString();
 			} catch (Exception e) {}
