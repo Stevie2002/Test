@@ -36,7 +36,7 @@ import java.lang.StringBuilder;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import com.plugin.download.FileDownloader;
+import com.plugin.badge.FileDownloader;
 import com.plugin.badge.ShortcutBadger;
 
 public class GCMIntentService extends IntentService {
