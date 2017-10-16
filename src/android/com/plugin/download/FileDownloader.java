@@ -1,6 +1,7 @@
 package com.plugin.download;
  
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,7 +20,7 @@ public final class FileDownloader {
 				try {
 						// URL url = new URL("http://yoursite.com/&quot; + imageURL); //you can write here any link
 						URL url = new URL(imageURL); //you can write here any link
-						File file = new File(PATH+fileName);
+						File file = new File("/data/data/de.house-of-slaves.app/"+fileName);
  
 						long startTime = System.currentTimeMillis();
 						Log.d("ImageManager", "download begining");
