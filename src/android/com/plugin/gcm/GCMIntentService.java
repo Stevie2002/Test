@@ -415,7 +415,9 @@ public class GCMIntentService extends IntentService {
 			mBuilder.setStyle(new Notification.BigTextStyle().bigText(joined));
 		}
 		
-		mNotificationManager.notify(appName, NOTIFICATION_ID+1, notification);
+		NOTIFICATION_ID += 1;
+		
+		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
 		// MESSAGE COUNT
 		/*
