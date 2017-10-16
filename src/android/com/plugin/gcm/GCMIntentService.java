@@ -401,6 +401,8 @@ public class GCMIntentService extends IntentService {
 			NOTIFICATION_ID += 1;
 		}
 		
+		Notification notification = mBuilder.build();
+		
 		Notification groupBuilder =
             new Notification.Builder(this)
 				.setContentTitle("Group Title")
@@ -409,7 +411,6 @@ public class GCMIntentService extends IntentService {
 				.setGroup("GROUP_1")
 				.build();
 		
-		Notification notification = mBuilder.build();
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, groupBuilder);
 		mNotificationManager.notify(appName, ++NOTIFICATION_ID, notification);
