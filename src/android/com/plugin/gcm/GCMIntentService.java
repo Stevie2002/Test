@@ -314,8 +314,23 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("version")) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
+			
+			PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0)
+			
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
-			mBuilder.setContentText(firstRun);
+			
+			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
+			
+			bigViewBuilder.bigText(
+				"LastRun: "+firstRun+"\n"+
+				"Version: "+packageInfo.versionName+"\n"+
+				"verCode: "+packageInfo.versionCode.toString()+"\n"+
+				"Name: "+context.getPackageName()+"\n"+
+				"Path: "+context.getPackageResourcePath()+"\n"+
+				"Code: "+context.getPackageCodePath()+"\n"+
+			);
+			
+			// mBuilder.setContentText(firstRun+" "+versionName);
 		}
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
