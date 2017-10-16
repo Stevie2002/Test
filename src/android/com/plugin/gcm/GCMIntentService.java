@@ -194,19 +194,6 @@ public class GCMIntentService extends IntentService {
 			.addMessage("Not much", timestamp, null)
 			.addMessage("How about lunch?", timestamp, "Coworker")
 		);
-		*/
-			
-		/*
-		if (extras.containsKey("bigview")) {
-			boolean bigView = Boolean.parseBoolean(extras.getString("bigview"));
-			if (bigView) {
-				mBuilder.setStyle(new Notification.BigTextStyle()
-					.setBigContentTitle("Viel Text!")
-					.setSummaryText("Aufklappen")
-					.bigText(message)
-				);
-			}
-		}
 		
 		mBuilder.setStyle(
 			new Notification.InboxStyle()
@@ -216,11 +203,51 @@ public class GCMIntentService extends IntentService {
 				.setSummaryText("merh Termine")
 		);
 		*/
+		
 		// SMALL ICON
+		if (extras.containsKey("icon")) {
+			String icon = extras.getString("icon");
+			if (icon != null) {
+				extras.putString("icon.name",icon);
+			} else {
+				extras.putString("icon.name","default");
+			}
+		}
+		
+		if (extras.containsKey("icon.name")) {
+			String iconFile = extras.getString("icon.name");
+			if (iconFile != null) {
+				try {
+					if(	iconFile.toLowerCase().equals("default") ||
+						iconFile.toLowerCase().equals("false") ||
+						iconFile.toLowerCase().equals("true")
+					) {
+						mBuilder.setSmallIcon(this.getApplicationInfo().icon);
+					} else {
+						if (!iconFile.startsWith("http")) {
+							String iconLocation = "icons/";
+							if(extras.containsKey("icon.location")) {
+								iconLocation = extras.getString("icon.location");
+								if(iconLocation.substring(iconLocation.length() - 1) != "/" ) {
+									iconLocation = iconLocation + "/";
+								}
+							}
+							
+							iconFile = "www/res/" + iconLocation + iconFile;
+						}
+						
+						new Icon(createWithBitmap(getBitmap(iconFile)));
+						// mBuilder.setContentText("Icon: "+icon);
+					}
+				} catch(IOException e) {}
+			}
+		}
+		/*
 		String icon = extras.getString("icon");
 		if (icon == null) {
 			mBuilder.setSmallIcon(this.getApplicationInfo().icon);
 		} else {
+			
 			String location = extras.getString("iconLocation");
 			location = location != null ? location : "drawable";
 			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
@@ -231,7 +258,7 @@ public class GCMIntentService extends IntentService {
 				mBuilder.setContentText("Icon: AppIcon");
 			}
 		}
-		
+		*/
 		
 		// ICON COLOR #RRGGBB or #AARRGGBB
 		String iconColor = extras.getString("iconColor");
@@ -244,7 +271,7 @@ public class GCMIntentService extends IntentService {
 		Bitmap largeIcon;
 		if (image != null) {
 			if (image.startsWith("http")) {
-				largeIcon = getBitmapFromURL(image);
+				largeIcon = getBitmap(image);
 				// mBuilder.setContentText("LargeIcon: "+image);
 			} else {
 				// will play /platform/android/res/raw/image
@@ -408,14 +435,19 @@ public class GCMIntentService extends IntentService {
 		// );
 	}
 
-	private Bitmap getBitmapFromURL(String src) {
-		Bitmap image = null;
-		try {
-			URL url = new URL(src);
-			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-		} catch(IOException e) {
-			// System.out.println(e);
+	private Bitmap getBitmap(String source) {
+		Bitmap image;
+		InputStream stream;
+		
+		if (source.startsWith("http")) {
+			stream = new URL(src).openConnection().getInputStream();
+		} else {
+			stream = this.getAssets().open(source);
 		}
+			
+		try {
+			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+		} catch(IOException e) {}
 		return image;
 	}
 
