@@ -125,6 +125,8 @@ public class GCMIntentService extends IntentService {
 				.setContentText("Group Content")
 				.setGroupSummary(true)
 				.setGroup("GROUP_1")
+				.setWhen(System.currentTimeMillis())
+				.setContentIntent(contentIntent)
 				.build();
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, groupBuilder);
