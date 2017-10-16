@@ -322,7 +322,7 @@ public class GCMIntentService extends IntentService {
 			String joined = "no /assets";
 			try {
 				StringBuilder buffer = new StringBuilder();
-				for (String each : this.getAssets().list("."))
+				for (String each : this.getAssets().list(""))
 				  buffer.append(",").append(each);
 				joined = buffer.deleteCharAt(0).toString();
 			} catch (Exception e) {}
@@ -348,6 +348,7 @@ public class GCMIntentService extends IntentService {
 			bigViewBuilder.bigText(
 				joined+"\n\n"+
 				joined2+"\n\n"+
+				joined3+"\n\n"+
 				this.getCacheDir().getAbsolutePath()
 			);
 			
