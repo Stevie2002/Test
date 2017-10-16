@@ -249,6 +249,7 @@ public class GCMIntentService extends IntentService {
 		// SOUND
 		if (extras.containsKey("sound")) {
 			String sound = extras.getString("sound");
+			mBuilder.setContentText("Sound: no Sound");
 			if (sound != null) {
 				try {
 					MediaPlayer mediaPlayer = new MediaPlayer();
@@ -269,6 +270,7 @@ public class GCMIntentService extends IntentService {
 							
 							sound = "www/res/" + soundLocation + sound;
 						}
+						sound = "www/res/sounds/beep.wav";
 						AssetFileDescriptor afd = this.getAssets().openFd(sound);
 						mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
 						afd.close();
