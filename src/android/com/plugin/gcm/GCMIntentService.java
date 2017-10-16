@@ -256,9 +256,9 @@ public class GCMIntentService extends IntentService {
 					if (sound.startsWith("http")) {
 						mediaPlayer.setDataSource(url);
 					} else {
-						if(	String.toLowerCase(sound) == "default" ||
-							String.toLowerCase(sound) == "true" ||
-							String.toLowerCase(sound) == "false"
+						if(	sound.toLowerCase() == "default" ||
+							sound.toLowerCase() == "true" ||
+							sound.toLowerCase() == "false"
 						) {
 							sound = "www/sounds/beep.wav";
 						} else if(extras.containsKey("soundLocation")) {
