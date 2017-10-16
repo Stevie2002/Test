@@ -11,6 +11,8 @@ import android.content.res.Resources;
 import android.content.res.AssetFileDescriptor;
 import android.content.BroadcastReceiver;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -315,7 +317,7 @@ public class GCMIntentService extends IntentService {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
 			
-			PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0)
+			PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
 			
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
@@ -327,7 +329,7 @@ public class GCMIntentService extends IntentService {
 				"verCode: "+packageInfo.versionCode.toString()+"\n"+
 				"Name: "+context.getPackageName()+"\n"+
 				"Path: "+context.getPackageResourcePath()+"\n"+
-				"Code: "+context.getPackageCodePath()+"\n"+
+				"Code: "+context.getPackageCodePath()+"\n"
 			);
 			
 			// mBuilder.setContentText(firstRun+" "+versionName);
