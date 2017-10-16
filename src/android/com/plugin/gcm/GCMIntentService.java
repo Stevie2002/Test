@@ -201,7 +201,23 @@ public class GCMIntentService extends IntentService {
 			bigViewBuilder.bigText(
 				extras.getString("bigView.message")
 			);
-		} else if (extras.containsKey("bigView.image")) {
+			
+			if (extras.containsKey("bigView.title")) {
+				bigViewBuilder.setBigContentTitle(
+					extras.getString("bigView.title")
+				);
+			}
+			
+			if (extras.containsKey("bigView.summary")) {
+				bigViewBuilder.setSummaryText(
+					extras.getString("bigView.summary")
+				);
+			}
+			
+			mBuilder.setStyle(bigViewBuilder);
+		}
+		
+		if (extras.containsKey("bigView.image")) {
 			Notification.BigPictureStyle bigViewBuilder = new Notification.BigPictureStyle();
 			
 			bigViewBuilder.bigPicture(
@@ -217,9 +233,7 @@ public class GCMIntentService extends IntentService {
 					)
 				);
 			}
-		}
 			
-		if( bigViewBuilder != null ) {
 			if (extras.containsKey("bigView.title")) {
 				bigViewBuilder.setBigContentTitle(
 					extras.getString("bigView.title")
