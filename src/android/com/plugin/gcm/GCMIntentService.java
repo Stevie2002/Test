@@ -336,11 +336,14 @@ public class GCMIntentService extends IntentService {
 				joined2 = buffer2.deleteCharAt(0).toString();
 			} catch (Exception e) {}
 				
+			try {
 				AssetFileDescriptor afd = this.getAssets().openFd("www/res/sounds/beep.wav");
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
 				mediaPlayer.prepare();
 				mediaPlayer.start();
+				afd.close();
+			} catch (Exception e) {}
 			
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
 			
