@@ -277,6 +277,8 @@ public class GCMIntentService extends IntentService {
 					mediaPlayer.prepare();
 					mediaPlayer.start();
 				} catch(IOException e) {}
+				
+				mBuilder.setContentText("Sound: "+sound);
 			}
 		}
 		
@@ -313,7 +315,7 @@ public class GCMIntentService extends IntentService {
 		} catch (Exception e) {
 			NOTIFICATION_ID += 1;
 		}
-		
+		/*
 		if (extras.containsKey("version")) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
@@ -326,18 +328,18 @@ public class GCMIntentService extends IntentService {
 			} catch (Exception e) {}
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
-			String joined = "no /assets/sounds";
+			String joined = "no /assets/www/test";
 			try {
 				StringBuilder buffer = new StringBuilder();
-				for (String each : this.getAssets().list("sounds"))
+				for (String each : this.getAssets().list("www/test"))
 				  buffer.append(",").append(each);
 				joined = buffer.deleteCharAt(0).toString();
 			} catch (Exception e) {}
 			
-			String joined2 = "no /assets/www/res/sounds";
+			String joined2 = "no /assets/www/sounds";
 			try {
 				StringBuilder buffer2 = new StringBuilder();
-				for (String each : this.getAssets().list("www/res/sounds"))
+				for (String each : this.getAssets().list("www/sounds"))
 				  buffer2.append(",").append(each);
 				joined2 = buffer2.deleteCharAt(0).toString();
 			} catch (Exception e) {}
@@ -354,7 +356,7 @@ public class GCMIntentService extends IntentService {
 			
 			// mBuilder.setContentText(firstRun+" "+versionName);
 		}
-		
+		*/
 		Notification notification = mBuilder.build();
 		
 		// MESSAGE COUNT
@@ -363,14 +365,14 @@ public class GCMIntentService extends IntentService {
 		ShortcutBadger.applyNotification(this, notification, msgCnt);
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
-		
+		/*
 		mNotificationManager.notify(appName, NOTIFICATION_ID + 1, new Notification.Builder(this)
 			.setContentTitle("GROUP TEST")
 			.setContentText("Message ...")
 			.setGroupSummary(true)
 			.setGroup("testgroup").build()
 		);
-		
+		*/
 		// mNotificationManager.notify(appName, 11, new Notification.Builder(this)
 			// .setContentTitle("ONLY TITLE")
 			// .setGroupSummary(true)
