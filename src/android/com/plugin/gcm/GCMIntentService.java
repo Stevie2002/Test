@@ -137,7 +137,7 @@ public class GCMIntentService extends IntentService {
 		message = message != null ? message : extras.getString("gcm.notification.body");
 		message = message != null ? message : "<missing message content>";
 		mBuilder.setContentText(message);
-		/*
+		
 		// SUBTEXT
 		if (extras.containsKey("subtext")) {
 			mBuilder.setSubText(
@@ -259,7 +259,6 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("progress")) {
 			mBuilder.setProgress(100,25,false);
 		}
-		*/
 		
 		// MESSAGES
 		/*
@@ -293,7 +292,7 @@ public class GCMIntentService extends IntentService {
 				.setSummaryText("merh Termine")
 		);
 		*/
-		/*
+		
 		// SOUND
 		if (extras.containsKey("sound")) {
 			String sound = extras.getString("sound");
@@ -341,8 +340,7 @@ public class GCMIntentService extends IntentService {
 				} catch(IOException e) {}
 			}
 		}
-		*/
-		/*
+		
 		// LIGHTS
 		String ledColor = extras.getString("ledColor");
 		if (ledColor != null) {
@@ -367,8 +365,7 @@ public class GCMIntentService extends IntentService {
 			}
 			mBuilder.setLights(Color.parseColor(ledColor), ledOn, ledOff);
 		}
-		*/
-		/*
+		
 		if (extras.containsKey("version")) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
@@ -395,8 +392,7 @@ public class GCMIntentService extends IntentService {
 			
 			mBuilder.setStyle(new Notification.BigTextStyle().bigText(joined));
 		}
-		*/
-
+		
 		try {
 			NOTIFICATION_ID = Integer.parseInt(extras.getString("notId"));
 		} catch (NumberFormatException e) {
@@ -410,10 +406,11 @@ public class GCMIntentService extends IntentService {
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
 		// MESSAGE COUNT
+		/*
 		int msgCnt = Integer.parseInt(extras.getString("msgcnt"));
 		ShortcutBadger.applyCount(this, msgCnt);
 		ShortcutBadger.applyNotification(this, notification, msgCnt);
-		
+		*/
 	}
 
 	private Bitmap getBitmapFromURL(String src) {
