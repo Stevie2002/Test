@@ -1,4 +1,4 @@
-package com.plugin.badge;
+package com.plugin.gcm;
  
 import java.io.BufferedInputStream;
 import java.io.File;
