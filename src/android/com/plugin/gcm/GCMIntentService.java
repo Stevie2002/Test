@@ -112,7 +112,29 @@ public class GCMIntentService extends IntentService {
 		notificationIntent.putExtra("pushBundle", extras);
 		
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-	
+		
+		try {
+			NOTIFICATION_ID = Integer.parseInt(extras.getString("notId"));
+		} catch (NumberFormatException e) {
+			NOTIFICATION_ID += 1;
+		} catch (Exception e) {
+			NOTIFICATION_ID += 1;
+		}
+		
+		Notification notification = mBuilder.build();
+		
+		Notification groupBuilder =
+            new Notification.Builder(this)
+				.setContentTitle("Group Title")
+				.setContentText("Group Content")
+				.setGroupSummary(true)
+				.setGroup("GROUP_1")
+				.build();
+		
+		
+		mNotificationManager.notify(appName, NOTIFICATION_ID, groupBuilder);
+		
+		
 		Notification.Builder mBuilder = new Notification.Builder(this);
 		
 		mBuilder.setWhen(System.currentTimeMillis());
@@ -393,26 +415,6 @@ public class GCMIntentService extends IntentService {
 			mBuilder.setStyle(new Notification.BigTextStyle().bigText(joined));
 		}
 		
-		try {
-			NOTIFICATION_ID = Integer.parseInt(extras.getString("notId"));
-		} catch (NumberFormatException e) {
-			NOTIFICATION_ID += 1;
-		} catch (Exception e) {
-			NOTIFICATION_ID += 1;
-		}
-		
-		Notification notification = mBuilder.build();
-		
-		Notification groupBuilder =
-            new Notification.Builder(this)
-				.setContentTitle("Group Title")
-				.setContentText("Group Content")
-				.setGroupSummary(true)
-				.setGroup("GROUP_1")
-				.build();
-		
-		
-		mNotificationManager.notify(appName, NOTIFICATION_ID, groupBuilder);
 		mNotificationManager.notify(appName, NOTIFICATION_ID+1, notification);
 		
 		// MESSAGE COUNT
