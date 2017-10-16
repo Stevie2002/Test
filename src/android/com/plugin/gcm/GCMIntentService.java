@@ -31,6 +31,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.lang.StringBuilder;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -318,17 +319,16 @@ public class GCMIntentService extends IntentService {
 			} catch (Exception e) {
 			}
 			
+			StringBuilder buffer = new StringBuilder();
+			for (String each : this.fileList())
+			  buffer.append(",").append(each);
+			String joined = buffer.deleteCharAt(0).toString();
+			
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
 			
-			bigViewBuilder.bigText(
-				"LastRun: "+firstRun+"\n"+
-				packageText+
-				"Name: "+this.getPackageName()+"\n"+
-				"Path: "+this.getPackageResourcePath()+"\n"+
-				"Code: "+this.getPackageCodePath()+"\n"
-			);
+			bigViewBuilder.bigText(joined);
 			
 			mBuilder.setStyle(bigViewBuilder);
 			
