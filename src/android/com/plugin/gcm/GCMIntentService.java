@@ -249,7 +249,7 @@ public class GCMIntentService extends IntentService {
 		// SOUND
 		if (extras.containsKey("sound")) {
 			String sound = extras.getString("sound");
-			if (soundFile != null) {
+			if (sound != null) {
 				extras.putString("sound.name",sound);
 			} else {
 				extras.putString("sound.name","default");
