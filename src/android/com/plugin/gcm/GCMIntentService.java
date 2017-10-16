@@ -293,7 +293,7 @@ public class GCMIntentService extends IntentService {
 				.setSummaryText("merh Termine")
 		);
 		*/
-		
+		/*
 		// SOUND
 		if (extras.containsKey("sound")) {
 			String sound = extras.getString("sound");
@@ -341,8 +341,8 @@ public class GCMIntentService extends IntentService {
 				} catch(IOException e) {}
 			}
 		}
-		
-		
+		*/
+		/*
 		// LIGHTS
 		String ledColor = extras.getString("ledColor");
 		if (ledColor != null) {
@@ -367,7 +367,7 @@ public class GCMIntentService extends IntentService {
 			}
 			mBuilder.setLights(Color.parseColor(ledColor), ledOn, ledOff);
 		}
-		
+		*/
 		/*
 		if (extras.containsKey("version")) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
