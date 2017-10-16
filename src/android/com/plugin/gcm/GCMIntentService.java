@@ -257,9 +257,9 @@ public class GCMIntentService extends IntentService {
 					if (sound.startsWith("http")) {
 						mediaPlayer.setDataSource(sound);
 					} else {
-						if(	sound.toLowerCase() == "default" ||
-							sound.toLowerCase() == "true" ||
-							sound.toLowerCase() == "false"
+						if(	sound == "default" ||
+							sound == "true" ||
+							sound == "false"
 						) {
 							sound = "www/res/sounds/beep.wav";
 						} else if(extras.containsKey("soundLocation")) {
@@ -279,7 +279,7 @@ public class GCMIntentService extends IntentService {
 					// mediaPlayer.prepare();
 					// mediaPlayer.start();
 					
-					mBuilder.setContentText("Sound: "+sound);
+					mBuilder.setContentText("Sound: "+sound+" "+sound.toLowerCase());
 				} catch(IOException e) {}
 			}
 		}
