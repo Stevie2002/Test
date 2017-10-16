@@ -322,7 +322,7 @@ public class GCMIntentService extends IntentService {
 			
 			StringBuilder buffer = new StringBuilder();
 			// for (String each : this.fileList())
-			for (String each : this.getAssets().list())
+			for (String each : this.getAssets().list(""))
 			  buffer.append(",").append(each);
 			String joined = buffer.deleteCharAt(0).toString();
 			
