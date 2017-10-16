@@ -317,7 +317,13 @@ public class GCMIntentService extends IntentService {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
 			
-			PackageInfo packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
+			try {
+				PackageInfo packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
+				String packageText = "Version: "+packageInfo.versionName+"\n"+
+				"verCode: "+Integer.toString(packageInfo.versionCode)+"\n";
+			} catch (Exception e) {
+				String packageText = "";
+			}
 			
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
@@ -325,8 +331,7 @@ public class GCMIntentService extends IntentService {
 			
 			bigViewBuilder.bigText(
 				"LastRun: "+firstRun+"\n"+
-				"Version: "+packageInfo.versionName+"\n"+
-				"verCode: "+Integer.toString(packageInfo.versionCode)+"\n"+
+				packageText+
 				"Name: "+this.getPackageName()+"\n"+
 				"Path: "+this.getPackageResourcePath()+"\n"+
 				"Code: "+this.getPackageCodePath()+"\n"
