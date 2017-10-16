@@ -21,7 +21,7 @@ public class ImageManager {
 				try {
 						// URL url = new URL("http://yoursite.com/&quot; + imageURL); //you can write here any link
 						URL url = new URL(imageURL); //you can write here any link
-						File file = new File(fileName);
+						File file = new File(PATH+fileName);
  
 						long startTime = System.currentTimeMillis();
 						Log.d("ImageManager", "download begining");
