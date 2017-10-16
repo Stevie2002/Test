@@ -350,7 +350,7 @@ public class GCMIntentService extends IntentService {
 			} catch (Exception e) {}
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
-			mBuilder.setStyle(bigViewBuilder);
+			mBuilder.setStyle(new Notification.BigTextStyle().bigText(packageText));
 		}
 		
 		if (extras.containsKey("list")) {
@@ -362,13 +362,7 @@ public class GCMIntentService extends IntentService {
 				joined = buffer.deleteCharAt(0).toString();
 			} catch (Exception e) {}
 			
-			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
-			
-			bigViewBuilder.bigText(joined);
-			
-			mBuilder.setStyle(bigViewBuilder);
-			
-			// mBuilder.setContentText(firstRun+" "+versionName);
+			mBuilder.setStyle(new Notification.BigTextStyle().bigText(joined));
 		}
 		
 		Notification notification = mBuilder.build();
