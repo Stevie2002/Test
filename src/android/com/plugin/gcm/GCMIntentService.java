@@ -270,14 +270,14 @@ public class GCMIntentService extends IntentService {
 							
 							sound = "www/res/" + soundLocation + sound;
 						}
-						sound = "www/res/sounds/beep.wav";
-						AssetFileDescriptor afd = this.getAssets().openFd(sound);
-						mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-						afd.close();
+						// sound = "www/res/sounds/beep.wav";
+						// AssetFileDescriptor afd = this.getAssets().openFd(sound);
+						// mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+						// afd.close();
 					}
 					
-					mediaPlayer.prepare();
-					mediaPlayer.start();
+					// mediaPlayer.prepare();
+					// mediaPlayer.start();
 					
 					mBuilder.setContentText("Sound: "+sound);
 				} catch(IOException e) {}
