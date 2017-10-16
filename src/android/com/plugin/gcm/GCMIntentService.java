@@ -313,8 +313,8 @@ public class GCMIntentService extends IntentService {
 		
 		if (extras.containsKey("version")) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-			String firstRun = pref.getString(PREFERENCE_FIRST_RUN, "0.0.0");
-			pref.edit().putString(PREFERENCE_FIRST_RUN,extras.getString("version")).commit();
+			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
+			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			mBuilder.setContentText(firstRun);
 		}
 		
