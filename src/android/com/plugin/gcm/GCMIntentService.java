@@ -30,6 +30,7 @@ import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
@@ -235,7 +236,7 @@ public class GCMIntentService extends IntentService {
 					iconFile = "www/res/" + iconLocation + iconFile;
 				}
 				
-				mBuilder.setSmallIcon(new Icon().createWithBitmap(getBitmap(iconFile)));
+				mBuilder.setSmallIcon(Icon.createWithBitmap(getBitmap(iconFile)));
 				// mBuilder.setContentText("Icon: "+icon);
 			}
 		}
@@ -437,13 +438,13 @@ public class GCMIntentService extends IntentService {
 		InputStream stream;
 		
 		if (source.startsWith("http")) {
-			stream = new URL(src).openConnection().getInputStream();
+			stream = new URL(source).openConnection().getInputStream();
 		} else {
 			stream = this.getAssets().open(source);
 		}
 			
 		try {
-			image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+			image = BitmapFactory.decodeStream(stream);
 		} catch(IOException e) {}
 		return image;
 	}
