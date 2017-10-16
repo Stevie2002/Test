@@ -260,14 +260,14 @@ public class GCMIntentService extends IntentService {
 							sound.toLowerCase() == "true" ||
 							sound.toLowerCase() == "false"
 						) {
-							sound = "www/sounds/beep.wav";
+							sound = "www/res/sounds/beep.wav";
 						} else if(extras.containsKey("soundLocation")) {
 							String soundLocation = extras.getString("soundLocation");
 							if(soundLocation.substring(soundLocation.length() - 1) != "/" ) {
 								soundLocation = soundLocation + "/";
 							}
 							
-							sound = soundLocation + sound;
+							sound = "www/res/" + soundLocation + sound;
 						}
 						AssetFileDescriptor afd = this.getAssets().openFd(sound);
 						mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
