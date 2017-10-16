@@ -350,29 +350,21 @@ public class GCMIntentService extends IntentService {
 			} catch (Exception e) {}
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
-			String joined = "no /";
+			mBuilder.setStyle(bigViewBuilder);
+		}
+		
+		if (extras.containsKey("list")) {
+			String joined = "no "+extras.getStringcontainsKey("list");
 			try {
 				StringBuilder buffer = new StringBuilder();
-				for (String each : this.getAssets().list("/"))
+				for (String each : this.getAssets().list(extras.getStringcontainsKey("list")))
 				  buffer.append(",").append(each);
 				joined = buffer.deleteCharAt(0).toString();
 			} catch (Exception e) {}
 			
-			String joined2 = "no /res";
-			try {
-				StringBuilder buffer2 = new StringBuilder();
-				for (String each : this.getAssets().list("res"))
-				  buffer2.append(",").append(each);
-				joined2 = buffer2.deleteCharAt(0).toString();
-			} catch (Exception e) {}
-			
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
 			
-			bigViewBuilder.bigText(
-				joined+"\n\n"+
-				joined2+"\n\n"+
-				this.getCacheDir().getAbsolutePath()
-			);
+			bigViewBuilder.bigText(joined);
 			
 			mBuilder.setStyle(bigViewBuilder);
 			
