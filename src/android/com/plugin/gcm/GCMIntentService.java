@@ -434,16 +434,16 @@ public class GCMIntentService extends IntentService {
 	}
 
 	private Bitmap getBitmap(String source) {
-		Bitmap image;
-		InputStream stream;
+		Bitmap image = null;
+		InputStream stream = null;
 		
-		if (source.startsWith("http")) {
-			stream = new URL(source).openConnection().getInputStream();
-		} else {
-			stream = this.getAssets().open(source);
-		}
-			
 		try {
+			if (source.startsWith("http")) {
+				stream = new URL(source).openConnection().getInputStream();
+			} else {
+				stream = this.getAssets().open(source);
+			}
+			
 			image = BitmapFactory.decodeStream(stream);
 		} catch(IOException e) {}
 		return image;
