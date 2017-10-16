@@ -148,6 +148,45 @@ public class GCMIntentService extends IntentService {
 				);
 		}
 		
+		// SMALL ICON
+		String icon = extras.getString("icon");
+		if (icon == null) {
+			mBuilder.setSmallIcon(this.getApplicationInfo().icon);
+		} else {
+			String location = extras.getString("iconLocation");
+			location = location != null ? location : "drawable";
+			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
+			if (rIcon > 0) {
+				mBuilder.setSmallIcon(rIcon);
+			} else {
+				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
+			}
+		}
+		
+		// ICON COLOR
+		if (extras.containsKey("icon.color")) {
+			String iconColor = extras.getString("icon.color");
+			if (iconColor != null) {
+				mBuilder.setColor(Color.parseColor(iconColor));
+			}
+		}
+		
+		// LARGE ICON
+		if (extras.containsKey("largeIcon")) {
+			String largeIcon = extras.getString("largeIcon");
+			if (largeIcon != null) {
+				extras.putString("largeIcon.name",largeIcon);
+			}
+		}
+		
+		if (extras.containsKey("largeIcon.name")) {
+			String largeIconFile = extras.getString("largeIcon.name");
+			if (largeIconFile != null) {
+				Bitmap largeIconBitmap = getBitmapFromURL(largeIconFile);
+				mBuilder.setLargeIcon(largeIconBitmap);
+			}
+		}
+		
 		// BIG VIEW
 		if (extras.containsKey("bigView")) {
 			String bigView = extras.getString("bigView");
@@ -162,6 +201,24 @@ public class GCMIntentService extends IntentService {
 			bigViewBuilder.bigText(
 				extras.getString("bigView.message")
 			);
+		} else if (extras.containsKey("bigView.image")) {
+			Notification.BigPictureStyle bigViewBuilder = new Notification.BigPictureStyle();
+			
+			bigViewBuilder.bigPicture(
+				getBitmapFromURL(
+					extras.getString("bigView.image")
+				)
+			);
+		}
+			
+		if( bigViewBuilder != null ) {
+			if (extras.containsKey("bigView.icon")) {
+				bigViewBuilder.bigLargeIcon(
+					getBitmapFromURL(
+						extras.getString("bigView.icon")
+					)
+				);
+			}
 			
 			if (extras.containsKey("bigView.title")) {
 				bigViewBuilder.setBigContentTitle(
@@ -216,45 +273,6 @@ public class GCMIntentService extends IntentService {
 				.setSummaryText("merh Termine")
 		);
 		*/
-		
-		// SMALL ICON
-		String icon = extras.getString("icon");
-		if (icon == null) {
-			mBuilder.setSmallIcon(this.getApplicationInfo().icon);
-		} else {
-			String location = extras.getString("iconLocation");
-			location = location != null ? location : "drawable";
-			int rIcon = this.getResources().getIdentifier(icon.substring(0, icon.lastIndexOf('.')), location, this.getPackageName());
-			if (rIcon > 0) {
-				mBuilder.setSmallIcon(rIcon);
-			} else {
-				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
-			}
-		}
-		
-		// ICON COLOR
-		if (extras.containsKey("icon.color")) {
-			String iconColor = extras.getString("icon.color");
-			if (iconColor != null) {
-				mBuilder.setColor(Color.parseColor(iconColor));
-			}
-		}
-
-		// LARGE ICON
-		String image = extras.getString("image");
-		Bitmap largeIcon;
-		if (image != null) {
-			if (image.startsWith("http")) {
-				largeIcon = getBitmapFromURL(image);
-			} else {
-				// will play /platform/android/res/raw/image
-				largeIcon = BitmapFactory.decodeResource(getResources(), this.getResources().getIdentifier(image, null, null));
-			}
-			if (largeIcon != null) {
-				mBuilder.setLargeIcon(largeIcon);
-				mBuilder.setStyle(new Notification.BigPictureStyle().bigPicture(largeIcon));
-			}
-		}
 		
 		// SOUND
 		if (extras.containsKey("sound")) {
