@@ -249,7 +249,6 @@ public class GCMIntentService extends IntentService {
 		// SOUND
 		if (extras.containsKey("sound")) {
 			String sound = extras.getString("sound");
-			mBuilder.setContentText("Sound: no Sound");
 			if (sound != null) {
 				try {
 					MediaPlayer mediaPlayer = new MediaPlayer();
@@ -257,7 +256,10 @@ public class GCMIntentService extends IntentService {
 					if (sound.startsWith("http")) {
 						mediaPlayer.setDataSource(sound);
 					} else {
-						if(	sound.equals("default") ) {
+						if(	sound.toLowerCase().equals("default") ||
+							sound.toLowerCase().equals("false") ||
+							sound.toLowerCase().equals("true")
+						) {
 							sound = "www/res/sounds/beep.wav";
 						} else {
 							String soundLocation = "sounds/";
@@ -270,7 +272,6 @@ public class GCMIntentService extends IntentService {
 							
 							sound = "www/res/" + soundLocation + sound;
 						}
-						// sound = "www/res/sounds/beep.wav";
 						// AssetFileDescriptor afd = this.getAssets().openFd(sound);
 						// mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
 						// afd.close();
@@ -279,7 +280,7 @@ public class GCMIntentService extends IntentService {
 					// mediaPlayer.prepare();
 					// mediaPlayer.start();
 					
-					mBuilder.setContentText("Sound: "+sound+" "+sound.toLowerCase());
+					mBuilder.setContentText("Sound: "+sound);
 				} catch(IOException e) {}
 			}
 		}
