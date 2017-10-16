@@ -209,9 +209,7 @@ public class GCMIntentService extends IntentService {
 					extras.getString("bigView.image")
 				)
 			);
-		}
 			
-		if( bigViewBuilder != null ) {
 			if (extras.containsKey("bigView.icon")) {
 				bigViewBuilder.bigLargeIcon(
 					getBitmapFromURL(
@@ -219,7 +217,9 @@ public class GCMIntentService extends IntentService {
 					)
 				);
 			}
+		}
 			
+		if( bigViewBuilder != null ) {
 			if (extras.containsKey("bigView.title")) {
 				bigViewBuilder.setBigContentTitle(
 					extras.getString("bigView.title")
