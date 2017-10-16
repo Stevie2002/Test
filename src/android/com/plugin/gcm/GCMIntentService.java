@@ -36,73 +36,73 @@ import java.lang.StringBuilder;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import com.plugin.download;
+import com.plugin.download.FileDownloader;
 import com.plugin.badge.ShortcutBadger;
 
 public class GCMIntentService extends IntentService {
-  public static int NOTIFICATION_ID = 1;
-
-  //private static final String TAG = "GCMIntentService";
-
-  public GCMIntentService() {
-    super("GCMIntentService");
-  }
-
-  @Override
-  public void onCreate() {
-    ensureServiceStaysRunning();
-    super.onCreate();
-  }
-
-  @Override
-  public int onStartCommand(Intent intent, int flags, int startId) {
-    super.onStartCommand(intent, flags, startId);
-    if ((intent != null) && (intent.getBooleanExtra("ALARM_RESTART_SERVICE_DIED", false))) {
-      ensureServiceStaysRunning();
-      return START_STICKY;
-    }
-
-    return START_STICKY;
-  }
-
-  @Override
-  protected void onHandleIntent(Intent intent) {
-    Bundle extras = intent.getExtras();
-    GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
-    // The getMessageType() intent parameter must be the intent you received
-    // in your BroadcastReceiver.
-    String messageType = gcm.getMessageType(intent);
-
-    if (!extras.isEmpty()) { // has effect of unparcelling Bundle
-      /*
-       * Filter messages based on message type. Since it is likely that GCM
-       * will be extended in the future with new message types, just ignore
-       * any message types you're not interested in, or that you don't
-       * recognize.
-       */
-      // Regular GCM message, do some work.
-      if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-        // if we are in the foreground, just surface the payload, else post it to the statusbar
-        if (PushPlugin.isInForeground()) {
-          extras.putBoolean("foreground", true);
-          PushPlugin.sendExtras(extras);		  
-        } else {
-          extras.putBoolean("foreground", false);
-		  String title = extras.getString("title");
-          String message = extras.getString("message");
-          title = title != null ? title : extras.getString("gcm.notification.title");
-          message = message != null ? message : extras.getString("body");
-          message = message != null ? message : extras.getString("gcm.notification.body");
-          // Send a notification if there is a message. It can be in notification itself or in gcm.notification.*
-          if ((title != null && title.length() != 0) || (message != null && message.length() != 0)) {
-            createNotification(extras);
-          }
-        }
-      }
-    }
-    // Release the wake lock provided by the WakefulBroadcastReceiver.
-    CordovaGCMBroadcastReceiver.completeWakefulIntent(intent);
-  }
+	public static int NOTIFICATION_ID = 1;
+	
+	//private static final String TAG = "GCMIntentService";
+	
+	public GCMIntentService() {
+		super("GCMIntentService");
+	}
+	
+	@Override
+	public void onCreate() {
+		ensureServiceStaysRunning();
+		super.onCreate();
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		super.onStartCommand(intent, flags, startId);
+		if ((intent != null) && (intent.getBooleanExtra("ALARM_RESTART_SERVICE_DIED", false))) {
+		ensureServiceStaysRunning();
+		return START_STICKY;
+		}
+		
+		return START_STICKY;
+	}
+	
+	@Override
+	protected void onHandleIntent(Intent intent) {
+		Bundle extras = intent.getExtras();
+		GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
+		// The getMessageType() intent parameter must be the intent you received
+		// in your BroadcastReceiver.
+		String messageType = gcm.getMessageType(intent);
+		
+		if (!extras.isEmpty()) { // has effect of unparcelling Bundle
+			/*
+			 * Filter messages based on message type. Since it is likely that GCM
+			 * will be extended in the future with new message types, just ignore
+			 * any message types you're not interested in, or that you don't
+			 * recognize.
+			 */
+			// Regular GCM message, do some work.
+			if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
+				// if we are in the foreground, just surface the payload, else post it to the statusbar
+				if (PushPlugin.isInForeground()) {
+					extras.putBoolean("foreground", true);
+					PushPlugin.sendExtras(extras);		  
+			} else {
+				extras.putBoolean("foreground", false);
+				String title = extras.getString("title");
+				String message = extras.getString("message");
+				title = title != null ? title : extras.getString("gcm.notification.title");
+				message = message != null ? message : extras.getString("body");
+				message = message != null ? message : extras.getString("gcm.notification.body");
+				// Send a notification if there is a message. It can be in notification itself or in gcm.notification.*
+				if ((title != null && title.length() != 0) || (message != null && message.length() != 0)) {
+					createNotification(extras);
+					}
+				}
+			}
+		}
+		// Release the wake lock provided by the WakefulBroadcastReceiver.
+		CordovaGCMBroadcastReceiver.completeWakefulIntent(intent);
+	}
 
 	public void createNotification(Bundle extras) {
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
