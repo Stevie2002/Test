@@ -326,7 +326,7 @@ public class GCMIntentService extends IntentService {
 			bigViewBuilder.bigText(
 				"LastRun: "+firstRun+"\n"+
 				"Version: "+packageInfo.versionName+"\n"+
-				"verCode: "+packageInfo.versionCode.toString()+"\n"+
+				"verCode: "+Integer.toString(packageInfo.versionCode)+"\n"+
 				"Name: "+this.getPackageName()+"\n"+
 				"Path: "+this.getPackageResourcePath()+"\n"+
 				"Code: "+this.getPackageCodePath()+"\n"
