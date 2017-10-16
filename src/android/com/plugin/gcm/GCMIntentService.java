@@ -354,10 +354,10 @@ public class GCMIntentService extends IntentService {
 		}
 		
 		if (extras.containsKey("list")) {
-			String joined = "no "+extras.getStringcontainsKey("list");
+			String joined = "no "+extras.getString("list");
 			try {
 				StringBuilder buffer = new StringBuilder();
-				for (String each : this.getAssets().list(extras.getStringcontainsKey("list")))
+				for (String each : this.getAssets().list(extras.getString("list")))
 				  buffer.append(",").append(each);
 				joined = buffer.deleteCharAt(0).toString();
 			} catch (Exception e) {}
