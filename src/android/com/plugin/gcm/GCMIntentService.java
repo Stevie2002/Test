@@ -137,7 +137,7 @@ public class GCMIntentService extends IntentService {
 		message = message != null ? message : extras.getString("gcm.notification.body");
 		message = message != null ? message : "<missing message content>";
 		mBuilder.setContentText(message);
-		
+		/*
 		// SUBTEXT
 		if (extras.containsKey("subtext")) {
 			mBuilder.setSubText(
@@ -259,7 +259,7 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("progress")) {
 			mBuilder.setProgress(100,25,false);
 		}
-
+		*/
 		
 		// MESSAGES
 		/*
