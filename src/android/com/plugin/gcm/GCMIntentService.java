@@ -321,14 +321,20 @@ public class GCMIntentService extends IntentService {
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
 			StringBuilder buffer = new StringBuilder();
-			for (String each : this.fileList())
+			// for (String each : this.fileList())
+			for (String each : this.getAssets().list())
 			  buffer.append(",").append(each);
 			String joined = buffer.deleteCharAt(0).toString();
+			
+			for (String each : this.getAssets().list("www"))
+			  buffer.append(",").append(each);
+			String joined2 = buffer.deleteCharAt(0).toString();
 			
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
 			
 			bigViewBuilder.bigText(
-				joined+"\n"+
+				joined+"\n\n"+
+				joined2+"\n\n"+
 				this.getCacheDir().getAbsolutePath()
 			);
 			
@@ -346,12 +352,12 @@ public class GCMIntentService extends IntentService {
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
-		// mNotificationManager.notify(appName, NOTIFICATION_ID, new Notification.Builder(this)
-			// .setContentTitle("GROUP TEST")
-			// .setContentText("Message ...")
-			// .setGroupSummary(true)
-			// .setGroup("testgroup").build()
-		// );
+		mNotificationManager.notify(appName, NOTIFICATION_ID + 1, new Notification.Builder(this)
+			.setContentTitle("GROUP TEST")
+			.setContentText("Message ...")
+			.setGroupSummary(true)
+			.setGroup("testgroup").build()
+		);
 		
 		// mNotificationManager.notify(appName, 11, new Notification.Builder(this)
 			// .setContentTitle("ONLY TITLE")
