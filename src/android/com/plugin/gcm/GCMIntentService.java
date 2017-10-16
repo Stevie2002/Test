@@ -16,6 +16,7 @@ import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -148,6 +149,13 @@ public class GCMIntentService extends IntentService {
 		}
 		
 		// BIG VIEW
+		if (extras.containsKey("bigView")) {
+			String bigView = extras.getString("bigView");
+			if (bigView != null) {
+				extras.putString("bigView.message",bigView);
+			}
+		}
+		
 		if (extras.containsKey("bigView.message")) {
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
 			
@@ -220,6 +228,7 @@ public class GCMIntentService extends IntentService {
 				mBuilder.setSmallIcon(rIcon);
 			} else {
 				mBuilder.setSmallIcon(this.getApplicationInfo().icon);
+				mBuilder.setContentText("Icon: AppIcon");
 			}
 		}
 		
@@ -236,6 +245,7 @@ public class GCMIntentService extends IntentService {
 		if (image != null) {
 			if (image.startsWith("http")) {
 				largeIcon = getBitmapFromURL(image);
+				// mBuilder.setContentText("LargeIcon: "+image);
 			} else {
 				// will play /platform/android/res/raw/image
 				largeIcon = BitmapFactory.decodeResource(getResources(), this.getResources().getIdentifier(image, null, null));
@@ -409,11 +419,11 @@ public class GCMIntentService extends IntentService {
 		return image;
 	}
 
-  private static String getAppName(Context context) {
-    CharSequence appName = context.getPackageManager().getApplicationLabel(context.getApplicationInfo());
+	private static String getAppName(Context context) {
+		CharSequence appName = context.getPackageManager().getApplicationLabel(context.getApplicationInfo());
 
-    return (String) appName;
-  }
+	return (String) appName;
+	}
 
   private void ensureServiceStaysRunning() {
     // KitKat appears to have (in some cases) forgotten how to honor START_STICKY
