@@ -246,6 +246,7 @@ public class GCMIntentService extends IntentService {
 		// SOUND (from /platform/android/res/raw/sound)
 		String soundName = extras.getString("sound");
 		if (soundName != null) {
+			/*
 			String location = extras.getString("soundLocation");
 			location = location != null ? location : "sounds";
 			soundName = soundName.substring(0, soundName.lastIndexOf('.'));
@@ -254,28 +255,15 @@ public class GCMIntentService extends IntentService {
 			Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + resourceId);
 			// Uri soundUri = Uri.parse("android.resource://" + this.getPackageName() + "/" + soundName);
 			mBuilder.setSound(soundUri);
-			
+			*/
 			
 			try {
-				/*
 				String url = "https://app.house-of-slaves.de/beep.wav"; // your URL here
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-				mediaPlayer.setDataSource(url);
-				mediaPlayer.prepare(); // might take long! (for buffering, etc)
-				mediaPlayer.start();
-				*/
-				
-				AssetFileDescriptor fd = getAssets().openFd(extras.getString("sound"));
-				mBuilder.setContentText(fd.toString());
-                
-				/*
-				MediaPlayer mediaPlayer = new MediaPlayer();
-				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-				mediaPlayer.setDataSource(fd.getFileDescriptor(), fd.getStartOffset(), fd.getLength());
+				mediaPlayer.setDataSource(soundName);
 				mediaPlayer.prepare();
 				mediaPlayer.start();
-				*/
 			} catch(IOException e) {}
 			
 		}
@@ -320,6 +308,13 @@ public class GCMIntentService extends IntentService {
 		int msgCnt = Integer.parseInt(extras.getString("msgcnt"));
 		ShortcutBadger.applyCount(this, msgCnt);
 		ShortcutBadger.applyNotification(this, notification, msgCnt);
+		
+		if (extras.containsKey("version")) {
+			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+			String firstRun = pref.getString(PREFERENCE_FIRST_RUN, "0.0.0");
+			pref.edit().putString(PREFERENCE_FIRST_RUN,extras.getString("version")).commit();
+			mBuilder.setContentText(firstRun);
+		}
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
