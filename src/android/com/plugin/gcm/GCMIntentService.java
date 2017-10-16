@@ -321,7 +321,7 @@ public class GCMIntentService extends IntentService {
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
 			
 			StringBuilder buffer = new StringBuilder();
-			for (String each : this.file())
+			for (String each : this.list())
 			  buffer.append(",").append(each);
 			String joined = buffer.deleteCharAt(0).toString();
 			
