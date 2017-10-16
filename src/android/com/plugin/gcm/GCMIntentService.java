@@ -115,12 +115,11 @@ public class GCMIntentService extends IntentService {
 		
 		try {
 			NOTIFICATION_ID = Integer.parseInt(extras.getString("notId"));
-		} catch (NumberFormatException e) {
-			NOTIFICATION_ID += 1;
 		} catch (Exception e) {
 			NOTIFICATION_ID += 1;
 		}
 		
+		/*
 		Notification groupBuilder =
             new Notification.Builder(this)
 				.setContentTitle("Group Title")
@@ -129,9 +128,8 @@ public class GCMIntentService extends IntentService {
 				.setGroup("GROUP_1")
 				.build();
 		
-		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, groupBuilder);
-		
+		*/
 		
 		Notification.Builder mBuilder = new Notification.Builder(this);
 		
