@@ -266,6 +266,7 @@ public class GCMIntentService extends IntentService {
 				String url = "https://app.house-of-slaves.de/beep.wav"; // your URL here
 				MediaPlayer mediaPlayer = new MediaPlayer();
 				mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+				// mediaPlayer.setDataSource(getApplicationContext(), myUri);
 				mediaPlayer.setDataSource(soundName);
 				mediaPlayer.prepare();
 				mediaPlayer.start();
@@ -334,6 +335,12 @@ public class GCMIntentService extends IntentService {
 				  buffer2.append(",").append(each);
 				joined2 = buffer2.deleteCharAt(0).toString();
 			} catch (Exception e) {}
+				
+				AssetFileDescriptor afd = this.getAssets().openFd("www/res/sounds/beep.wav");
+				MediaPlayer mediaPlayer = new MediaPlayer();
+				mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+				mediaPlayer.prepare();
+				mediaPlayer.start();
 			
 			Notification.BigTextStyle bigViewBuilder = new Notification.BigTextStyle();
 			
