@@ -249,30 +249,35 @@ public class GCMIntentService extends IntentService {
 		// SOUND
 		if (extras.containsKey("sound")) {
 			String sound = extras.getString("sound");
-			if (sound != null) {
+			extras.putString("sound.name",sound)
+		}
+		
+		if (extras.containsKey("sound.name")) {
+			String soundFile = extras.getString("sound.name");
+			if (soundFile != null) {
 				try {
 					MediaPlayer mediaPlayer = new MediaPlayer();
 					
-					if (sound.startsWith("http")) {
-						mediaPlayer.setDataSource(sound);
+					if (soundFile.startsWith("http")) {
+						mediaPlayer.setDataSource(soundFile);
 					} else {
-						if(	sound.toLowerCase().equals("default") ||
-							sound.toLowerCase().equals("false") ||
-							sound.toLowerCase().equals("true")
+						if(	soundFile.toLowerCase().equals("default") ||
+							soundFile.toLowerCase().equals("false") ||
+							soundFile.toLowerCase().equals("true")
 						) {
-							sound = "www/res/sounds/beep.wav";
+							soundFile = "www/res/sounds/beep.wav";
 						} else {
 							String soundLocation = "sounds/";
-							if(extras.containsKey("soundLocation")) {
-								soundLocation = extras.getString("soundLocation");
+							if(extras.containsKey("sound.location")) {
+								soundLocation = extras.getString("sound.location");
 								if(soundLocation.substring(soundLocation.length() - 1) != "/" ) {
 									soundLocation = soundLocation + "/";
 								}
 							}
 							
-							sound = "www/res/" + soundLocation + sound;
+							soundFile = "www/res/" + soundLocation + soundFile;
 						}
-						AssetFileDescriptor afd = this.getAssets().openFd(sound);
+						AssetFileDescriptor afd = this.getAssets().openFd(soundFile);
 						mediaPlayer.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
 						afd.close();
 					}
