@@ -131,13 +131,19 @@ public class GCMIntentService extends IntentService {
 		title = title != null ? title : extras.getString("gcm.notification.title");
 		mBuilder.setContentTitle(title);
 		mBuilder.setTicker(title);
-		mBuilder.setSubText("subtext");
 		
 		// MESSAGE
 		String message = extras.getString("message");
 		message = message != null ? message : extras.getString("gcm.notification.body");
 		message = message != null ? message : "<missing message content>";
 		mBuilder.setContentText(message);
+		
+		// SUBTEXT
+		if (extras.containsKey("subtext")) {
+			mBuilder.setSubText(
+				extras.getString("subtext")
+			);
+		}
 		
 		// GROUP
 		if (extras.containsKey("group")) {
@@ -175,12 +181,12 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("largeIcon")) {
 			String largeIcon = extras.getString("largeIcon");
 			if (largeIcon != null) {
-				extras.putString("largeIcon.name",largeIcon);
+				extras.putString("icon.large",largeIcon);
 			}
 		}
 		
-		if (extras.containsKey("largeIcon.name")) {
-			String largeIconFile = extras.getString("largeIcon.name");
+		if (extras.containsKey("icon.large")) {
+			String largeIconFile = extras.getString("icon.large");
 			if (largeIconFile != null) {
 				Bitmap largeIconBitmap = getBitmapFromURL(largeIconFile);
 				mBuilder.setLargeIcon(largeIconBitmap);
@@ -240,9 +246,9 @@ public class GCMIntentService extends IntentService {
 				);
 			}
 			
-			if (extras.containsKey("bigView.summary")) {
+			if (extras.containsKey("bigView.message")) {
 				bigViewBuilder.setSummaryText(
-					extras.getString("bigView.summary")
+					extras.getString("bigView.message")
 				);
 			}
 			
