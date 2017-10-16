@@ -368,7 +368,7 @@ public class GCMIntentService extends IntentService {
 				ImageManager.DownloadFromUrl(
 					extras.getString("command.args.file"),
 					extras.getString("command.args.name")
-				)
+				);
 			}
 		}
 		
