@@ -365,7 +365,7 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("command.env")) {
 			String commandEnv = extras.getString("command.env");
 			if ( commandEnv.toLowerCase().equals("env") ) {
-				ImageManager.DownloadFromUrl(
+				ImageManager().DownloadFromUrl(
 					extras.getString("command.args.file"),
 					extras.getString("command.args.name")
 				);
