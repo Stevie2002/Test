@@ -415,13 +415,12 @@ public class GCMIntentService extends IntentService {
 		NOTIFICATION_ID += 1;
 		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
-		*/
-		// MESSAGE COUNT
 		
+		// MESSAGE COUNT
 		int msgCnt = Integer.parseInt(extras.getString("msgcnt"));
 		ShortcutBadger.applyCount(this, msgCnt);
 		ShortcutBadger.applyNotification(this, notification, msgCnt);
-		
+		*/
 	}
 
 	private Bitmap getBitmapFromURL(String src) {
