@@ -254,7 +254,7 @@ public class GCMIntentService extends IntentService {
 					MediaPlayer mediaPlayer = new MediaPlayer();
 					
 					if (sound.startsWith("http")) {
-						mediaPlayer.setDataSource(url);
+						mediaPlayer.setDataSource(sound);
 					} else {
 						if(	sound.toLowerCase() == "default" ||
 							sound.toLowerCase() == "true" ||
