@@ -401,9 +401,18 @@ public class GCMIntentService extends IntentService {
 			NOTIFICATION_ID += 1;
 		}
 		
+		Notification groupBuilder =
+            new Notification.Builder(context)
+				.setContentTitle("Group Title")
+				.setContentText("Group Content")
+				.setGroupSummary(true)
+				.setGroup("GROUP_1")
+				.build();
+		
 		Notification notification = mBuilder.build();
 		
-		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
+		mNotificationManager.notify(appName, NOTIFICATION_ID, groupBuilder);
+		mNotificationManager.notify(appName, ++NOTIFICATION_ID, notification);
 		
 		// MESSAGE COUNT
 		/*
