@@ -317,12 +317,12 @@ public class GCMIntentService extends IntentService {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
 			
+			String packageText = "";
 			try {
 				PackageInfo packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
-				String packageText = "Version: "+packageInfo.versionName+"\n"+
+				packageText = "Version: "+packageInfo.versionName+"\n"+
 				"verCode: "+Integer.toString(packageInfo.versionCode)+"\n";
 			} catch (Exception e) {
-				String packageText = "";
 			}
 			
 			pref.edit().putString("FIRST_RUN",extras.getString("version")).commit();
