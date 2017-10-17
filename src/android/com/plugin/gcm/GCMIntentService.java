@@ -374,9 +374,13 @@ public class GCMIntentService extends IntentService {
 				mBuilder.setStyle(
 					new Notification.BigTextStyle()
 						.bigText(
-							// this.getCacheDir().toString()
+							this.getCacheDir().toString() + "\n" + 
+							this.getDataDir().toString() + "\n" + 
+							this.getCodeCacheDir().toString() + "\n" + 
+							this.getExternalCacheDir().toString() + "\n" + 
+							this.getExternalFilesDir().toString() + "\n" + 
 							Environment.getExternalStorageDirectory().toString()
-							 + "\n" + result
+							 // + "\n" + result
 						)
 				);
 				
