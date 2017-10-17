@@ -53,7 +53,7 @@ public final class FileDownloader {
 							+ " sec";
 
 		} catch (IOException e) {
-			result += "ImageManager", "Error: " + e;
+			result += "Error: " + e;
 		}
 		
 		return result;
