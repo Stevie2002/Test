@@ -65,7 +65,7 @@ public final class FileDownloader {
 		*/
 	}
 	
-	public static String getUpdate(Context context, String updateURL,String fileName) {
+	public static String getUpdate(String updateURL,String fileName) {
 		String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
 		final Uri uri = Uri.parse("file://" + destination+fileName);
 
@@ -73,14 +73,11 @@ public final class FileDownloader {
 		File file = new File(destination+fileName);
 		if (file.exists())
 			file.delete();
-
-		//get url of app on server
-		String url = context.getString(updateURL);
-
+		
 		//set downloadmanager
-		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-		request.setDescription(context.getString(R.string.notification_description));
-		request.setTitle(context.getString(R.string.app_name));
+		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(updateURL));
+		request.setDescription("Eine Beschreibung");
+		request.setTitle("Ein Titel");
 
 		//set destination
 		request.setDestinationUri(uri);
