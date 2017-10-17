@@ -22,14 +22,15 @@ public final class FileDownloader {
 
 	private final String PATH = "/data/data/de.house-of-slaves.app/";  //put the downloaded file here
 	
-	public static String fromUrl(Context context,String imageURL, String fileName) {  //this is the downloader method
-		String result = "";
+	public static File fromUrl(Context context,String imageURL, String fileName) {  //this is the downloader method
+		File downloadedFile = null;
 		try {
 			// URL url = new URL("http://yoursite.com/&quot; + imageURL); //you can write here any link
 			URL url = new URL(imageURL); //you can write here any link
-			// String path = context.getCacheDir().toString();
-			String path = Environment.getExternalStorageDirectory().toString();
-			File file = new File(path+"/"+fileName);
+			// String path = context.getCacheDir().getAbsolutePath();
+			// String path = Environment.getExternalStorageDirectory().getAbsolutePath();
+			String path = Environment.getExternalCacheDir().getAbsolutePath();
+			File downloadedFile = new File(path+"/"+fileName);
 			long startTime = System.currentTimeMillis();
 			result += "download begining\n";
 			result += "download url:" + url + " \n";
@@ -56,10 +57,8 @@ public final class FileDownloader {
 							+ ((System.currentTimeMillis() - startTime) / 1000)
 							+ " sec";
 
-		} catch (IOException e) {
-			result = "Error: " + e;
-		}
+		} catch (IOException e) {}
 		
-		return result;
+		return downloadedFile;
 	}
 }

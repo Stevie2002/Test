@@ -10,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+
+import com.plugin.download.FileDownloader;
  
 public class AppUpdater extends AsyncTask<String,Void,Void>{
     private Context context;
@@ -20,7 +22,11 @@ public class AppUpdater extends AsyncTask<String,Void,Void>{
     @Override
     protected Void doInBackground(String... arg0) {
         try {
-            URL url = new URL(arg0[0]);
+			
+			File downloadedFile = FileDownloader.fromUrl(context,arg0[0],"update.apk");
+			
+			/*
+			URL url = new URL(arg0[0]);
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             c.setRequestMethod("GET");
             c.setDoOutput(true);
@@ -44,9 +50,10 @@ public class AppUpdater extends AsyncTask<String,Void,Void>{
             }
             fos.close();
             is.close();
-
+			*/
+			
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(new File(PATH+"update.apk")), "application/vnd.android.package-archive");
+            intent.setDataAndType(Uri.fromFile(downloadedFile), "application/vnd.android.package-archive");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // without this flag android returned a intent error!
             context.startActivity(intent);
 
