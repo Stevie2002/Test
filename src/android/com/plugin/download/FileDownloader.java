@@ -9,9 +9,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import android.app.DownloadManager;
 import android.content.Context;
-import android.util.Log;
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
  
 public final class FileDownloader {
 
@@ -60,7 +64,7 @@ public final class FileDownloader {
 		*/
 	}
 	
-	public static String getUpdate(String updateURL,String fileName) {
+	public static String getUpdate(Contect context, String updateURL,String fileName) {
 		String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
 		final Uri uri = Uri.parse("file://" + destination+fileName);
 
@@ -70,12 +74,12 @@ public final class FileDownloader {
 			file.delete();
 
 		//get url of app on server
-		String url = Main.this.getString(updateURL);
+		String url = context.getString(updateURL);
 
 		//set downloadmanager
 		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-		request.setDescription(Main.this.getString(R.string.notification_description));
-		request.setTitle(Main.this.getString(R.string.app_name));
+		request.setDescription(context.getString(R.string.notification_description));
+		request.setTitle(context.getString(R.string.app_name));
 
 		//set destination
 		request.setDestinationUri(uri);
