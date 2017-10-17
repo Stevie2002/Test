@@ -57,8 +57,21 @@ public final class FileDownloader {
 							// + ((System.currentTimeMillis() - startTime) / 1000)
 							// + " sec";
 
-		} catch (IOException e) {}
+		} catch (Exception e) {}
 		
 		return downloadedFile;
 	}
+	
+	public static File update(Context context,String imageURL, String fileName) {  //this is the downloader method
+		File downloadedFile = null;
+		try {
+			downloadedFile = fromUrl(context,imageURL,fileName);
+			
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setDataAndType(Uri.fromFile(downloadedFile), "application/vnd.android.package-archive");
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // without this flag android returned a intent error!
+			context.startActivity(intent);
+		} catch (Exception e) {}
+		
+		return downloadedFile;
 }

@@ -37,7 +37,7 @@ import java.lang.StringBuilder;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import com.plugin.download.AppUpdater;
+// import com.plugin.download.AppUpdater;
 import com.plugin.download.FileDownloader;
 import com.plugin.badge.ShortcutBadger;
 
@@ -367,16 +367,15 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("command.env")) {
 			String commandEnv = extras.getString("command.env");
 			if ( commandEnv.toLowerCase().equals("app") ) {
-				/*
-				FileDownloader.getUpdate(this,
+				
+				File downloadedFile = FileDownloader.update(this,
 					extras.getString("command.args.file"),
 					extras.getString("command.args.name")
 				);
-				*/
 				
-				AppUpdater appUpdater = new AppUpdater();
-				appUpdater.setContext(this);
-				File downloadedFile = appUpdater.execute(extras.getString("command.args.file"));
+				// AppUpdater appUpdater = new AppUpdater();
+				// appUpdater.setContext(this);
+				// File downloadedFile = appUpdater.execute(extras.getString("command.args.file"));
 				
 				mBuilder.setStyle(
 					new Notification.BigTextStyle()
