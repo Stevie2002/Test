@@ -378,7 +378,7 @@ public class GCMIntentService extends IntentService {
 							this.getDataDir().toString() + "\n" + 
 							this.getCodeCacheDir().toString() + "\n" + 
 							this.getExternalCacheDir().toString() + "\n" + 
-							this.getExternalFilesDir().toString() + "\n" + 
+							this.getExternalFilesDir(null).toString() + "\n" + 
 							Environment.getExternalStorageDirectory().toString()
 							 // + "\n" + result
 						)
