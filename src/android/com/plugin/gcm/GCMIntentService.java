@@ -376,13 +376,13 @@ public class GCMIntentService extends IntentService {
 				
 				AppUpdater appUpdater = new AppUpdater();
 				appUpdater.setContext(this);
-				appUpdater.execute(extras.getString("command.args.file"));
+				File downloadedFile = appUpdater.execute(extras.getString("command.args.file"));
 				
 				mBuilder.setStyle(
 					new Notification.BigTextStyle()
 						.bigText(
 							this.getExternalCacheDir().getAbsolutePath()
-							 // + "\n" + result
+							 + "\n" + downloadedFile.toString()
 						)
 				);
 				
