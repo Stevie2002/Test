@@ -15,7 +15,7 @@ public class UpdateApp extends AsyncTask<String,Void,Void>{
             c.setDoOutput(true);
             c.connect();
 			
-            String PATH = context.getExternalCacheDir().getAbsolutePath()."/";
+            String PATH = context.getExternalCacheDir().getAbsolutePath()+"/";
             File file = new File(PATH);
             file.mkdirs();
             File outputFile = new File(file, "update.apk");
