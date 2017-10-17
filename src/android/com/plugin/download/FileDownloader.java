@@ -49,7 +49,7 @@ public final class FileDownloader {
 				   buffer.write(data,0,current);
 			 }
 
-			 FileOutputStream fos = new FileOutputStream(file);
+			 FileOutputStream fos = new FileOutputStream(downloadedFile);
 			 fos.write(buffer.toByteArray());
 			 fos.close();
 			
