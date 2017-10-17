@@ -53,7 +53,7 @@ public final class FileDownloader {
 							+ " sec";
 
 		} catch (IOException e) {
-			result += "Error: " + e;
+			String result += "Error: " + e;
 		}
 		
 		return result;
