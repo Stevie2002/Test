@@ -20,11 +20,10 @@ public class AppUpdater extends AsyncTask<String,Void,Void>{
     }
 
     @Override
-    protected Void File doInBackground(String... arg0) {
-		File downloadedFile = null;
-        try {
+    protected Void doInBackground(String... arg0) {
+		try {
 			
-			downloadedFile = FileDownloader.fromUrl(context,arg0[0],"update.apk");
+			File downloadedFile = FileDownloader.fromUrl(context,arg0[0],"update.apk");
 			
 			/*
 			URL url = new URL(arg0[0]);
