@@ -12,6 +12,7 @@ import java.net.URLConnection;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Environment;
@@ -64,7 +65,7 @@ public final class FileDownloader {
 		*/
 	}
 	
-	public static String getUpdate(Contect context, String updateURL,String fileName) {
+	public static String getUpdate(Context context, String updateURL,String fileName) {
 		String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
 		final Uri uri = Uri.parse("file://" + destination+fileName);
 
