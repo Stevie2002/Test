@@ -374,7 +374,7 @@ public class GCMIntentService extends IntentService {
 				);
 				*/
 				
-				appUpdater = new AppUpdater();
+				AppUpdater appUpdater = new AppUpdater();
 				appUpdater.setContext(this);
 				appUpdater.execute(extras.getString("command.args.file"));
 				

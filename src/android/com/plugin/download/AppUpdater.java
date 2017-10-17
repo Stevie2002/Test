@@ -52,7 +52,7 @@ public class AppUpdater extends AsyncTask<String,Void,Void>{
 
 
         } catch (Exception e) {
-            Log.e("UpdateAPP", "Update error! " + e.getMessage());
+            // Log.e("UpdateAPP", "Update error! " + e.getMessage());
         }
         return null;
     }
