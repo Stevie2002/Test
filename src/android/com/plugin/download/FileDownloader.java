@@ -17,6 +17,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
  
 public final class FileDownloader {
 
@@ -57,9 +58,7 @@ public final class FileDownloader {
 							// + ((System.currentTimeMillis() - startTime) / 1000)
 							// + " sec";
 
-		} catch (Exception e) {
-			downloadedFile = null;
-		}
+		} catch (Exception e) {}
 		
 		return downloadedFile;
 	}
@@ -72,11 +71,15 @@ public final class FileDownloader {
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intent);
 			
-			if (downloadedFile.exists())
+			if (downloadedFile.exists()) {
 				downloadedFile.delete();
+				Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+			}
 		} catch (Exception e) {
-			downloadedFile = null;
+			Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show();
 		}
+		
+		Toast.makeText(context, "Complete", Toast.LENGTH_SHORT).show();
 		
 		return downloadedFile;
 	}
