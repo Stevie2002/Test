@@ -65,7 +65,7 @@ public final class FileDownloader {
 		*/
 	}
 	
-	public static String getUpdate(String updateURL,String fileName) {
+	public static String getUpdate(Context context, String updateURL,String fileName) {
 		String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
 		final Uri uri = Uri.parse("file://" + destination+fileName);
 
@@ -83,7 +83,7 @@ public final class FileDownloader {
 		request.setDestinationUri(uri);
 
 		// get download service and enqueue file
-		final DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+		final DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
 		final long downloadId = manager.enqueue(request);
 
 		//set BroadcastReceiver to install app when .apk is downloaded
