@@ -30,7 +30,7 @@ public final class FileDownloader {
 			// String path = context.getCacheDir().getAbsolutePath();
 			// String path = Environment.getExternalStorageDirectory().getAbsolutePath();
 			String path = context.getExternalCacheDir().getAbsolutePath();
-			File downloadedFile = new File(path+"/"+fileName);
+			downloadedFile = new File(path+"/"+fileName);
 			long startTime = System.currentTimeMillis();
 			// result += "download begining\n";
 			// result += "download url:" + url + " \n";
