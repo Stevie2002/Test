@@ -80,7 +80,7 @@ public final class FileDownloader {
 			Toast.makeText(getBaseContext(), "ERROR", Toast.LENGTH_SHORT).show();
 		}
 		
-		Toast.execute("show",'{"message":"Test"}',null);
+		Toast.execute("show","{\"message\":\"Test\"}",null);
 		
 		return downloadedFile;
 	}
