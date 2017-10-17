@@ -11,6 +11,7 @@ import java.net.URLConnection;
 
 import android.content.Context;
 import android.util.Log;
+import android.os.Environment;
  
 public final class FileDownloader {
 
@@ -21,9 +22,9 @@ public final class FileDownloader {
 		try {
 			// URL url = new URL("http://yoursite.com/&quot; + imageURL); //you can write here any link
 			URL url = new URL(imageURL); //you can write here any link
-			String path = context.getCacheDir().toString();
+			// String path = context.getCacheDir().toString();
+			String path = Environment.getExternalStorageDirectory().toString();
 			File file = new File(path+"/"+fileName);
-
 			long startTime = System.currentTimeMillis();
 			result += "download begining\n";
 			result += "download url:" + url + " \n";

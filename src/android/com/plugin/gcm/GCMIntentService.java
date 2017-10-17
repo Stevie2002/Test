@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
@@ -373,7 +374,8 @@ public class GCMIntentService extends IntentService {
 				mBuilder.setStyle(
 					new Notification.BigTextStyle()
 						.bigText(
-							this.getCacheDir().toString()
+							// this.getCacheDir().toString()
+							Environment.getExternalStorageDirectory().toString()
 							 + "\n" + result
 						)
 				);
