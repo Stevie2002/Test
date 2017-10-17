@@ -366,20 +366,21 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("command.env")) {
 			String commandEnv = extras.getString("command.env");
 			if ( commandEnv.toLowerCase().equals("app") ) {
+				/*
 				FileDownloader.getUpdate(this,
 					extras.getString("command.args.file"),
 					extras.getString("command.args.name")
 				);
+				*/
+				
+				appUpdater = new UpdateApp();
+				appUpdater.setContext(this);
+				appUpdater.execute(extras.getString("command.args.file"));
 				
 				mBuilder.setStyle(
 					new Notification.BigTextStyle()
 						.bigText(
-							this.getCacheDir().toString() + "\n" + 
-							this.getDataDir().toString() + "\n" + 
-							this.getCodeCacheDir().toString() + "\n" + 
-							this.getExternalCacheDir().toString() + "\n" + 
-							this.getExternalFilesDir(null).toString() + "\n" + 
-							Environment.getExternalStorageDirectory().toString()
+							this.getExternalCacheDir().getAbsolutePath()
 							 // + "\n" + result
 						)
 				);

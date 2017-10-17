@@ -64,42 +64,4 @@ public final class FileDownloader {
 		return result;
 		*/
 	}
-	
-	public static String getUpdate(Context context, String updateURL,String fileName) {
-		String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
-		final Uri uri = Uri.parse("file://" + destination+fileName);
-
-		//Delete update file if exists
-		File file = new File(destination+fileName);
-		if (file.exists())
-			file.delete();
-		
-		//set downloadmanager
-		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(updateURL));
-		request.setDescription("Eine Beschreibung");
-		request.setTitle("Ein Titel");
-
-		//set destination
-		request.setDestinationUri(uri);
-
-		// get download service and enqueue file
-		final DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-		final long downloadId = manager.enqueue(request);
-
-		//set BroadcastReceiver to install app when .apk is downloaded
-		BroadcastReceiver onComplete = new BroadcastReceiver() {
-			public void onReceive(Context ctxt, Intent intent) {
-				Intent install = new Intent(Intent.ACTION_VIEW);
-				install.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				install.setDataAndType(uri,
-						manager.getMimeTypeForDownloadedFile(downloadId));
-				context.startActivity(install);
-
-				context.unregisterReceiver(this);
-				context.finish();
-			}
-		};
-		//register receiver for when .apk download is compete
-		registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-	}
 }
