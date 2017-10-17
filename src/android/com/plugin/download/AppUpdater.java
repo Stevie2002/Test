@@ -1,6 +1,6 @@
 package com.plugin.download;
 
-import android.os.AsyncTask<Params, Progress, Result> ;
+import android.os.AsyncTask;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
