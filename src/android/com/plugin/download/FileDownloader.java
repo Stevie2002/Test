@@ -71,9 +71,10 @@ public final class FileDownloader {
 			intent.setDataAndType(Uri.fromFile(downloadedFile), "application/vnd.android.package-archive");
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // without this flag android returned a intent error!
 			context.startActivity(intent);
-		} catch (Exception e) {
-			downloadedFile = null;
-		}
+			
+			if (downloadedFile.exists())
+				downloadedFile.delete();
+		} catch (Exception e) {}
 		
 		return downloadedFile;
 	}
