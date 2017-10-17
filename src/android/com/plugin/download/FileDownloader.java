@@ -21,7 +21,7 @@ public final class FileDownloader {
 		try {
 			// URL url = new URL("http://yoursite.com/&quot; + imageURL); //you can write here any link
 			URL url = new URL(imageURL); //you can write here any link
-			String path = context.getAssets().getCacheDir().toString();
+			String path = context.getCacheDir().toString();
 			File file = new File(path+"/"+fileName);
 
 			long startTime = System.currentTimeMillis();
