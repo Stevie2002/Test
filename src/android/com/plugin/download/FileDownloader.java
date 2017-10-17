@@ -93,10 +93,10 @@ public final class FileDownloader {
 				install.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				install.setDataAndType(uri,
 						manager.getMimeTypeForDownloadedFile(downloadId));
-				startActivity(install);
+				context.startActivity(install);
 
-				unregisterReceiver(this);
-				finish();
+				context.unregisterReceiver(this);
+				context.finish();
 			}
 		};
 		//register receiver for when .apk download is compete
