@@ -82,6 +82,8 @@
 	
     <source-file src="src/android/com/plugin/download/AppUpdater.java" target-dir="src/com/plugin/download/" />
     <source-file src="src/android/com/plugin/download/FileDownloader.java" target-dir="src/com/plugin/download/" />
+	
+    <source-file src="src/android/com/plugin/toast/Toast.java" target-dir="src/com/plugin/toast/" />
 
   </platform>
 

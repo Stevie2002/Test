@@ -17,7 +17,8 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.plugin.toast.Toast;
  
 public final class FileDownloader {
 
@@ -79,7 +80,7 @@ public final class FileDownloader {
 			Toast.makeText(getBaseContext(), "ERROR", Toast.LENGTH_SHORT).show();
 		}
 		
-		Toast.makeText(getBaseContext(), "Complete", Toast.LENGTH_SHORT).show();
+		Toast.execute("show",{"message":"Test"},null);
 		
 		return downloadedFile;
 	}
