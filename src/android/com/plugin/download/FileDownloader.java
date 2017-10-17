@@ -74,4 +74,5 @@ public final class FileDownloader {
 		} catch (Exception e) {}
 		
 		return downloadedFile;
+	}
 }
