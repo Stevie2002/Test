@@ -30,6 +30,7 @@ import android.support.v4.app.NotificationCompat;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
