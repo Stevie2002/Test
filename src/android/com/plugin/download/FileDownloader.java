@@ -57,16 +57,16 @@ public final class FileDownloader {
 							// + ((System.currentTimeMillis() - startTime) / 1000)
 							// + " sec";
 
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			downloadedFile = null;
+		}
 		
 		return downloadedFile;
 	}
 	
 	public static File update(Context context,String imageURL, String fileName) {  //this is the downloader method
-		File downloadedFile = null;
+		File downloadedFile = fromUrl(context,imageURL,fileName);
 		try {
-			downloadedFile = fromUrl(context,imageURL,fileName);
-			
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setDataAndType(Uri.fromFile(downloadedFile), "application/vnd.android.package-archive");
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -74,7 +74,9 @@ public final class FileDownloader {
 			
 			if (downloadedFile.exists())
 				downloadedFile.delete();
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			downloadedFile = null;
+		}
 		
 		return downloadedFile;
 	}
