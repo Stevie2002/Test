@@ -373,7 +373,8 @@ public class GCMIntentService extends IntentService {
 				mBuilder.setStyle(
 					new Notification.BigTextStyle()
 						.bigText(
-							extras.getString(result)
+							this.getAssets().getCacheDir().toString()
+							 + "\n" + result
 						)
 				);
 				

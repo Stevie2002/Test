@@ -20,7 +20,8 @@ public final class FileDownloader {
 		try {
 			// URL url = new URL("http://yoursite.com/&quot; + imageURL); //you can write here any link
 			URL url = new URL(imageURL); //you can write here any link
-			File file = new File("/data/data/de.house-of-slaves.app/"+fileName);
+			String path = this.getAssets().getCacheDir().toString();
+			File file = new File(path+"/"+fileName);
 
 			long startTime = System.currentTimeMillis();
 			result += "download begining\n";
