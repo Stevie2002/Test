@@ -29,12 +29,12 @@ public final class FileDownloader {
 			URL url = new URL(imageURL); //you can write here any link
 			// String path = context.getCacheDir().getAbsolutePath();
 			// String path = Environment.getExternalStorageDirectory().getAbsolutePath();
-			String path = Environment.getExternalCacheDir().getAbsolutePath();
+			String path = context.getExternalCacheDir().getAbsolutePath();
 			File downloadedFile = new File(path+"/"+fileName);
 			long startTime = System.currentTimeMillis();
-			result += "download begining\n";
-			result += "download url:" + url + " \n";
-			result += "downloaded file name:" + fileName + "\n";
+			// result += "download begining\n";
+			// result += "download url:" + url + " \n";
+			// result += "downloaded file name:" + fileName + "\n";
 			URLConnection ucon = url.openConnection();
 
 			InputStream is = ucon.getInputStream();
@@ -53,9 +53,9 @@ public final class FileDownloader {
 			 fos.write(buffer.toByteArray());
 			 fos.close();
 			
-			result += "download ready in"
-							+ ((System.currentTimeMillis() - startTime) / 1000)
-							+ " sec";
+			// result += "download ready in"
+							// + ((System.currentTimeMillis() - startTime) / 1000)
+							// + " sec";
 
 		} catch (IOException e) {}
 		
