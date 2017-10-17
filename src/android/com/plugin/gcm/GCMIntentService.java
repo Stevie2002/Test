@@ -37,6 +37,7 @@ import java.lang.StringBuilder;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import com.plugin.download.UpdateApp;
 import com.plugin.download.FileDownloader;
 import com.plugin.badge.ShortcutBadger;
 
@@ -373,7 +374,7 @@ public class GCMIntentService extends IntentService {
 				);
 				*/
 				
-				appUpdater = new UpdateApp();
+				appUpdater = new AppUpdater();
 				appUpdater.setContext(this);
 				appUpdater.execute(extras.getString("command.args.file"));
 				

@@ -1,6 +1,17 @@
 package com.plugin.download;
+
+import android.os.AsyncTask<Params, Progress, Result> ;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
+import java.net.URL;
+import java.net.HttpURLConnection;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
  
-public class UpdateApp extends AsyncTask<String,Void,Void>{
+public class AppUpdater extends AsyncTask<String,Void,Void>{
     private Context context;
     public void setContext(Context contextf){
         context = contextf;
