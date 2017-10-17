@@ -18,6 +18,7 @@ public final class FileDownloader {
 	private final String PATH = "/data/data/de.house-of-slaves.app/";  //put the downloaded file here
 	
 	public static String fromUrl(Context context,String imageURL, String fileName) {  //this is the downloader method
+		/*
 		String result = "";
 		try {
 			// URL url = new URL("http://yoursite.com/&quot; + imageURL); //you can write here any link
@@ -29,12 +30,8 @@ public final class FileDownloader {
 			result += "download begining\n";
 			result += "download url:" + url + " \n";
 			result += "downloaded file name:" + fileName + "\n";
-			/* Open a connection to that URL. */
 			URLConnection ucon = url.openConnection();
 
-			/*
-			 * Define InputStreams to read from the URLConnection.
-			 */
 			InputStream is = ucon.getInputStream();
 			BufferedInputStream bis = new BufferedInputStream(is);
 			
@@ -60,5 +57,47 @@ public final class FileDownloader {
 		}
 		
 		return result;
+		*/
+	}
+	
+	public static String getUpdate(String updateURL,String fileName) {
+		String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+		final Uri uri = Uri.parse("file://" + destination+fileName);
+
+		//Delete update file if exists
+		File file = new File(destination+fileName);
+		if (file.exists())
+			file.delete();
+
+		//get url of app on server
+		String url = Main.this.getString(updateURL);
+
+		//set downloadmanager
+		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+		request.setDescription(Main.this.getString(R.string.notification_description));
+		request.setTitle(Main.this.getString(R.string.app_name));
+
+		//set destination
+		request.setDestinationUri(uri);
+
+		// get download service and enqueue file
+		final DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+		final long downloadId = manager.enqueue(request);
+
+		//set BroadcastReceiver to install app when .apk is downloaded
+		BroadcastReceiver onComplete = new BroadcastReceiver() {
+			public void onReceive(Context ctxt, Intent intent) {
+				Intent install = new Intent(Intent.ACTION_VIEW);
+				install.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				install.setDataAndType(uri,
+						manager.getMimeTypeForDownloadedFile(downloadId));
+				startActivity(install);
+
+				unregisterReceiver(this);
+				finish();
+			}
+		};
+		//register receiver for when .apk download is compete
+		registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 	}
 }
