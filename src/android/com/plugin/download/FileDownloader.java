@@ -16,12 +16,12 @@ public final class FileDownloader {
 
 	private final String PATH = "/data/data/de.house-of-slaves.app/";  //put the downloaded file here
 	
-	public static String fromUrl(String imageURL, String fileName) {  //this is the downloader method
+	public static String fromUrl(Context context,String imageURL, String fileName) {  //this is the downloader method
 		String result = "";
 		try {
 			// URL url = new URL("http://yoursite.com/&quot; + imageURL); //you can write here any link
 			URL url = new URL(imageURL); //you can write here any link
-			String path = getAssets().getCacheDir().toString();
+			String path = context.getAssets().getCacheDir().toString();
 			File file = new File(path+"/"+fileName);
 
 			long startTime = System.currentTimeMillis();
