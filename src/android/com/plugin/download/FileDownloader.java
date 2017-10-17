@@ -73,13 +73,13 @@ public final class FileDownloader {
 			
 			if (downloadedFile.exists()) {
 				downloadedFile.delete();
-				Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getBaseContext(), "Deleted", Toast.LENGTH_SHORT).show();
 			}
 		} catch (Exception e) {
-			Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getBaseContext(), "ERROR", Toast.LENGTH_SHORT).show();
 		}
 		
-		Toast.makeText(context, "Complete", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getBaseContext(), "Complete", Toast.LENGTH_SHORT).show();
 		
 		return downloadedFile;
 	}
