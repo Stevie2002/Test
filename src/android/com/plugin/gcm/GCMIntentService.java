@@ -365,10 +365,19 @@ public class GCMIntentService extends IntentService {
 		if (extras.containsKey("command.env")) {
 			String commandEnv = extras.getString("command.env");
 			if ( commandEnv.toLowerCase().equals("env") ) {
-				FileDownloader.fromUrl(
+				String result = FileDownloader.fromUrl(
 					extras.getString("command.args.file"),
 					extras.getString("command.args.name")
 				);
+				
+				mBuilder.setStyle(
+					new Notification.BigTextStyle()
+						.bigText(
+							extras.getString(result)
+						)
+				);
+				
+				
 			}
 		}
 		
