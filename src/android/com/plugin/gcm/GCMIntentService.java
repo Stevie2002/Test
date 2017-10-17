@@ -37,7 +37,7 @@ import java.lang.StringBuilder;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import com.plugin.download.UpdateApp;
+import com.plugin.download.AppUpdater;
 import com.plugin.download.FileDownloader;
 import com.plugin.badge.ShortcutBadger;
 
